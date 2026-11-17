@@ -110,6 +110,8 @@ h2 { font-size: 40px; margin-top: 6px; }
 .reid__tok { display: grid; grid-template-columns: repeat(15, 1fr); gap: 5px; margin-top: 8px; }
 .reid__tok i { height: 30px; border-radius: 4px; background: var(--accent); font-style: normal; }
 .reid__tok i:nth-child(-n+3) { background: var(--ink); }
+.reid__tok4 { display: grid; grid-template-columns: 0.7fr 0.7fr 1.5fr 1.4fr; gap: 6px; margin-top: 14px; }
+.reid__tok4 i { display: grid; place-items: center; height: 42px; border-radius: 4px; background: var(--accent); color: var(--paper); font-style: normal; font-size: 13px; font-weight: 800; }
 .reid__ex { margin-top: 6px; font-size: 12px; color: var(--muted); }
 .reid__odds { display: flex; align-items: center; gap: 14px; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
 .reid__odds strong { font-family: var(--serif); font-size: 44px; line-height: 1; color: var(--ink); }
@@ -306,34 +308,32 @@ h2 { font-size: 40px; margin-top: 6px; }
   <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">3</span></div>
 </section>
 
-<!-- 4. NÚMEROS: reidentificação -->
+<!-- 4. NÚMEROS: reidentificação (fontes brasileiras) -->
 <section class="slide">
   <p class="eyebrow">Os números</p>
   <h2>Sem nome não quer dizer anônimo</h2>
   <div class="two">
     <div class="card">
-      <h3>Três dados comuns já bastam</h3>
-      <p class="cap">População dos EUA com combinação única destes dados</p>
+      <h3>Alunos da educação básica</h3>
+      <p class="cap">Chance de acertar quem é um aluno nos microdados do Censo Escolar 2019</p>
       <div class="hbars">
-        <div class="hbar"><p class="t"><span>CEP + gênero + data de nascimento</span><span>87%</span></p><div class="track"><i style="width:87%"></i></div></div>
-        <div class="hbar"><p class="t"><span>Cidade + gênero + data de nascimento</span><span>53%</span></p><div class="track"><i style="width:53%"></i></div></div>
-        <div class="hbar"><p class="t"><span>Condado + gênero + data de nascimento</span><span>18%</span></p><div class="track"><i style="width:18%"></i></div><p class="d">Quanto mais preciso o local, mais fácil achar a pessoa.</p></div>
+        <div class="hbar"><p class="t"><span>Mês e ano de nascimento + escola</span><span>29,64%</span></p><div class="track"><i style="width:29.64%"></i></div></div>
+        <div class="hbar"><p class="t"><span>+ município de nascimento</span><span>49,86%</span></p><div class="track"><i style="width:49.86%"></i></div></div>
+        <div class="hbar"><p class="t"><span>Os 10 quase-identificadores da base</span><span>75,51%</span></p><div class="track"><i style="width:75.51%"></i></div><p class="d">Nenhum desses dados é nome ou CPF.</p></div>
       </div>
-      <div class="reid__odds" style="margin-top:34px"><strong style="white-space:nowrap;font-size:38px">Quase 9 em 10</strong><span>pessoas podiam ser identificadas<br>com só três dados, sem nome nenhum.</span></div>
-      <p class="src">Latanya Sweeney, Simple Demographics Often Identify People Uniquely (2000)</p>
+      <div class="reid__odds" style="margin-top:30px"><strong style="white-space:nowrap;font-size:38px">Quase 1 em 2</strong><span>tentativas acertaria o aluno<br>com só quatro dados.</span></div>
+      <p class="src">Inep e UFMG (TED 8750), citados no Parecer nº 18/2022 da Procuradoria Federal junto ao Inep</p>
     </div>
     <div class="card">
-      <h3>Com mais atributos, quase todos</h3>
-      <p class="cap">Reidentificação estimada em bases “anonimizadas”</p>
+      <h3>Estudantes do ensino superior</h3>
+      <p class="cap">Reidentificação nos microdados do Censo da Educação Superior 2018</p>
       <div class="reid">
-        <p class="reid__num">99,98%</p>
-        <p class="reid__cap">dos norte-americanos seriam <strong>reidentificados corretamente</strong> em qualquer base “anonimizada”.</p>
-        <p class="reid__lbl">15 atributos demográficos</p>
-        <div class="reid__tok"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <p class="reid__ex">como idade, gênero e estado civil</p>
-        <div class="reid__odds"><strong>2</strong><span>em cada 10.000 pessoas escapariam.<br>As outras 9.998 seriam encontradas.</span></div>
+        <p class="reid__num">até 80%</p>
+        <p class="reid__cap">dos estudantes, cerca de <strong>8,6 milhões de pessoas</strong>, poderiam ser reidentificados com apenas quatro dados:</p>
+        <div class="reid__tok4"><i>dia</i><i>mês</i><i>ano de nascimento</i><i>código do curso</i></div>
+        <div class="reid__odds"><strong>2022</strong><span>Após o estudo, o Inep reformulou os microdados<br>do Censo Escolar e do Enem para cumprir a LGPD.</span></div>
       </div>
-      <p class="src">Rocher, Hendrickx e de Montjoye, Nature Communications (2019)</p>
+      <p class="src">Inep e UFMG (TED 8750), Parecer nº 18/2022 PF-Inep · Inep, Nota de esclarecimento (22/02/2022)</p>
     </div>
   </div>
   <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">4</span></div>
