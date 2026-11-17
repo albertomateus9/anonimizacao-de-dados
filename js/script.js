@@ -112,6 +112,59 @@
     $('#sortearRuido').disabled = true;
   }
 
+  // O experimento usa as mesmas seis linhas fictícias da tabela de generalização.
+  // Os números descrevem apenas esta amostra, não uma população real.
+  const sampleRows = $$('#painel-general .dados tbody tr');
+  const samples = sampleRows.map((row) => ({
+    city: row.cells[1]?.textContent.trim(),
+    state: row.cells[2]?.textContent.trim(),
+    age: Number(row.cells[3]?.textContent.trim()),
+    decade: row.cells[4]?.textContent.trim()
+  }));
+  const riskDemo = $('#riskDemo');
+  const precision = $('#precision');
+  if (samples.length === 6 && samples.every((sample) => sample.city && sample.state && Number.isFinite(sample.age) && sample.decade)) {
+    riskDemo.classList.add('is-enhanced');
+    const descriptions = {
+      city_age: 'Cidade e idade exata formam seis combinações únicas nesta amostra. Mais detalhe pode facilitar a ligação com outras fontes.',
+      state_decade: 'Estado e faixa de dez anos ainda formam seis combinações únicas nesta amostra. Reduzir a precisão nem sempre reduz a singularidade.',
+      state_only: 'Cada estado reúne dois registros nesta amostra. A idade e a cidade deixam de ser visíveis, mas grupos de dois ainda são pequenos e não garantem anonimização.'
+    };
+    function groupLabel(sample, level) {
+      if (level === 'city_age') return `${sample.city} · ${sample.age} anos`;
+      if (level === 'state_only') return sample.state;
+      return `${sample.state} · ${sample.decade}`;
+    }
+    function renderRisk(level) {
+      const groups = new Map();
+      samples.forEach((sample) => {
+        const label = groupLabel(sample, level);
+        groups.set(label, (groups.get(label) || 0) + 1);
+      });
+      const bars = $('#riskBars');
+      bars.replaceChildren();
+      const scale = Math.max(2, ...groups.values());
+      groups.forEach((count, label) => {
+        const item = document.createElement('li');
+        const name = document.createElement('span');
+        const bar = document.createElement('span');
+        const value = document.createElement('strong');
+        name.textContent = label;
+        bar.className = 'risk-bar';
+        bar.style.setProperty('--bar-width', `${count / scale * 100}%`);
+        bar.setAttribute('aria-hidden', 'true');
+        value.textContent = String(count);
+        item.append(name, bar, value);
+        bars.append(item);
+      });
+      $('#riskRecords').textContent = String(samples.length);
+      $('#riskUnique').textContent = String([...groups.values()].filter((count) => count === 1).length);
+      $('#riskExplain').textContent = descriptions[level];
+    }
+    renderRisk(precision.value);
+    precision.addEventListener('change', () => renderRisk(precision.value));
+  }
+
   // Marca a seção em leitura e permite avançar com as setas fora dos controles.
   const sections = $$('[data-step]');
   const sectionLinks = $$('.nav__links a');

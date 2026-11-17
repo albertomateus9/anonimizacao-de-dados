@@ -39,6 +39,7 @@
       </a>
       <button class="nav__menu" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <div class="nav__links" id="navLinks">
+        <a href="#experimento">Experimento</a>
         <a href="#conceito">O que é</a>
         <a href="#lgpd">LGPD</a>
         <a href="#riscos">Riscos</a>
@@ -55,18 +56,18 @@
       <div class="container hero__grid">
         <div class="hero__copy">
           <h1 id="titulo-hero">Anonimização de Dados</h1>
-          <p class="lead">Como esconder quem é a pessoa sem apagar o que os dados ensinam.</p>
+          <p class="lead">Esconder o nome é só o começo. Outros detalhes de uma tabela ainda podem apontar para uma pessoa.</p>
           <div class="actions">
-            <a class="btn" href="#tecnicas">Ver as três técnicas</a>
-            <a class="text-link" href="#lgpd">O que diz a LGPD</a>
+            <a class="btn" href="#experimento">Explorar os dados</a>
+            <a class="text-link" href="#tecnicas">Ver as três técnicas</a>
           </div>
           <p class="byline">Uma apresentação de Miguel Rocca, Christian Paraguassu, Carlos Eduardo, Emanuela, Pedro e João.</p>
         </div>
 
-        <!-- A ficha: o mesmo cadastro antes e depois da anonimização -->
+        <!-- A ficha mostra um registro fictício antes e depois de reduzir detalhes. -->
         <figure class="ficha" aria-labelledby="ficha-legenda">
           <table class="ficha__table">
-            <caption id="ficha-legenda">Um cadastro antes e depois da anonimização</caption>
+            <caption id="ficha-legenda">Um cadastro antes e depois da transformação</caption>
             <thead>
               <tr><th scope="col">Campo</th><th scope="col">Antes</th><th scope="col">Depois</th></tr>
             </thead>
@@ -98,12 +99,51 @@
       </div>
     </section>
 
-    <!-- ===== 2. O QUE É ===== -->
+    <!-- ===== 2. EXPERIMENTO COM DADOS FICTÍCIOS ===== -->
+    <section class="section experimento" id="experimento" aria-labelledby="titulo-experimento" data-step>
+      <div class="container">
+        <div class="story-heading">
+          <p class="eyebrow">01 / O problema</p>
+          <h2 id="titulo-experimento">Seis registros. Seis combinações únicas.</h2>
+          <p class="lead">Nesta amostra fictícia, trocar a cidade pelo estado e a idade por uma faixa de dez anos ainda deixa cada linha sozinha em seu grupo.</p>
+        </div>
+
+        <div class="risk-demo" id="riskDemo">
+          <div class="risk-demo__metrics" aria-live="polite">
+            <p><strong id="riskRecords">6</strong><span>registros fictícios</span></p>
+            <p><strong id="riskUnique">6</strong><span>combinações com apenas um registro</span></p>
+          </div>
+          <div class="risk-control">
+            <label for="precision">Informações consideradas</label>
+            <select id="precision">
+              <option value="city_age">Cidade e idade exata</option>
+              <option value="state_decade" selected>Estado e faixa de 10 anos</option>
+              <option value="state_only">Somente estado</option>
+            </select>
+          </div>
+          <div class="risk-demo__chart" role="group" aria-label="Tamanho dos grupos formados pelos dados exibidos">
+            <p class="chart-title">Quantos registros há em cada combinação?</p>
+            <ol class="risk-bars" id="riskBars">
+              <li><span>Acre · 70 a 79</span><span class="risk-bar" style="--bar-width:50%"></span><strong>1</strong></li>
+              <li><span>Rio Grande do Norte · 60 a 69</span><span class="risk-bar" style="--bar-width:50%"></span><strong>1</strong></li>
+              <li><span>Rio Grande do Norte · 90 a 99</span><span class="risk-bar" style="--bar-width:50%"></span><strong>1</strong></li>
+              <li><span>Acre · 80 a 89</span><span class="risk-bar" style="--bar-width:50%"></span><strong>1</strong></li>
+              <li><span>Rio de Janeiro · 30 a 39</span><span class="risk-bar" style="--bar-width:50%"></span><strong>1</strong></li>
+              <li><span>Rio de Janeiro · 60 a 69</span><span class="risk-bar" style="--bar-width:50%"></span><strong>1</strong></li>
+            </ol>
+          </div>
+          <p class="risk-demo__explain" id="riskExplain">Todas as seis combinações são únicas nesta pequena amostra. Isso não identifica ninguém automaticamente, mas pode facilitar a ligação com outras fontes.</p>
+        </div>
+        <p class="story-next">O desafio é reduzir essa possibilidade sem perder toda a informação útil. <a href="#conceito">Veja o que significa anonimizar</a>.</p>
+      </div>
+    </section>
+
+    <!-- ===== 3. O QUE É ===== -->
     <section class="section conceito" id="conceito" aria-labelledby="titulo-conceito" data-step>
       <div class="container conceito__grid">
         <div class="conceito__text">
           <h2 id="titulo-conceito">O que é anonimizar um dado</h2>
-          <p class="lead">É remover ou esconder as informações que permitem identificar uma pessoa específica em um banco de dados.</p>
+          <p class="lead">É transformar os dados para que uma pessoa não possa ser identificada por meios razoavelmente disponíveis, inclusive ao combinar informações de outras fontes.</p>
           <p>Para ser considerado anonimizado, o dado deve perder a possibilidade de associação direta ou indireta a alguém, considerando os meios técnicos razoáveis disponíveis no momento do tratamento.</p>
         </div>
         <div class="conceito__lists">
