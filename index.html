@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anonimização de Dados | Apresentação sobre LGPD e técnicas de proteção</title>
-  <meta name="description" content="Apresentação sobre anonimização de dados: o que é, o que diz a LGPD, os riscos de um vazamento e três técnicas para proteger a identidade das pessoas.">
+  <title>Anonimização de Dados | Mostra Científica da EETEPA Vilhena Alves</title>
+  <meta name="description" content="Experimentos interativos da turma de Ciência de Dados da EETEPA Vilhena Alves sobre anonimização, LGPD e ECA Digital.">
   <meta name="theme-color" content="#f4f7fb">
   <meta property="og:title" content="Anonimização de Dados">
-  <meta property="og:description" content="Como esconder quem é a pessoa sem apagar o que os dados ensinam.">
+  <meta property="og:description" content="Experimentos interativos sobre dados, anonimização e ECA Digital na Mostra Científica da EETEPA Vilhena Alves.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,11 +42,13 @@
         <a href="#experimento">Experimento</a>
         <a href="#conceito">O que é</a>
         <a href="#lgpd">LGPD</a>
+        <a href="#eca">ECA Digital</a>
         <a href="#riscos">Riscos</a>
         <a href="#tecnicas">Técnicas</a>
         <a href="#equipe">Equipe</a>
       </div>
     </nav>
+    <span class="read-progress" id="readProgress" aria-hidden="true"></span>
   </header>
 
   <main id="conteudo">
@@ -55,13 +57,14 @@
     <section class="hero" id="inicio" aria-labelledby="titulo-hero" data-step>
       <div class="container hero__grid">
         <div class="hero__copy">
+          <p class="eyebrow">Mostra Científica · EETEPA Vilhena Alves</p>
           <h1 id="titulo-hero">Anonimização de Dados</h1>
-          <p class="lead">Esconder o nome é só o começo. Outros detalhes de uma tabela ainda podem apontar para uma pessoa.</p>
+          <p class="lead">Se uma tabela não tem nomes, ela está segura? Explore os dados, tome decisões de publicação e descubra por que o contexto importa.</p>
           <div class="actions">
             <a class="btn" href="#experimento">Explorar os dados</a>
             <a class="text-link" href="#tecnicas">Ver as três técnicas</a>
           </div>
-          <p class="byline">Uma apresentação de Miguel Rocca, Christian Paraguassu, Carlos Eduardo, Emanuela, Pedro e João.</p>
+          <p class="byline">Trabalho desenvolvido pela turma de Ciência de Dados. Apresentação de Miguel Rocca, Christian Paraguassu, Carlos Eduardo, Emanuela, Pedro e João.</p>
         </div>
 
         <!-- A ficha mostra um registro fictício antes e depois de reduzir detalhes. -->
@@ -174,7 +177,7 @@
     <section class="band" id="lgpd" aria-labelledby="titulo-lgpd" data-step>
       <div class="container">
         <h2 id="titulo-lgpd">A lei que protege seus dados</h2>
-        <p class="statement">A LGPD obriga as empresas a cuidar das informações pessoais e pune quem deixa esses dados desprotegidos.</p>
+        <p class="statement">A LGPD estabelece regras para tratar dados pessoais. Retirar nomes de uma tabela não encerra a análise de risco.</p>
         <div class="lgpd__tools">
           <article class="tool">
             <h3>RIPD</h3>
@@ -191,7 +194,54 @@
       </div>
     </section>
 
-    <!-- ===== 4. RISCOS ===== -->
+    <!-- Cenário didático: registros gerados para esta demonstração, sem dados de alunos reais. -->
+    <section class="section eca" id="eca" aria-labelledby="titulo-eca" data-step>
+      <div class="container">
+        <div class="story-heading">
+          <p class="eyebrow">02 / A decisão de publicar</p>
+          <h2 id="titulo-eca">E se os dados fossem de adolescentes?</h2>
+          <p class="lead">Imagine um painel de participação em oficinas. Criamos 12 registros sintéticos: duas faixas etárias, dois setores fictícios e três oficinas. Nenhum registro pertence a estudante da EETEPA.</p>
+        </div>
+
+        <div class="eca-lab" id="ecaLab">
+          <div class="eca-lab__intro">
+            <h3>Monte uma versão pública do painel</h3>
+            <p>Quanto mais detalhes combinados, menores ficam os grupos. Escolha o que mostrar e observe o resultado nesta amostra inventada.</p>
+          </div>
+          <div class="eca-presets" id="ecaPresets" aria-label="Etapas sugeridas do experimento">
+            <button type="button" data-preset="all">1 · Todos os detalhes</button>
+            <button type="button" data-preset="age_activity">2 · Sem setor</button>
+            <button type="button" data-preset="activity">3 · Só oficina</button>
+          </div>
+          <fieldset class="eca-fields">
+            <legend>Informações no painel</legend>
+            <label><input type="checkbox" name="eca-field" value="age" checked> Faixa etária</label>
+            <label><input type="checkbox" name="eca-field" value="sector" checked> Setor fictício</label>
+            <label><input type="checkbox" name="eca-field" value="activity" checked> Oficina</label>
+          </fieldset>
+          <label class="eca-suppress"><input type="checkbox" id="ecaSuppress"> Ocultar grupos com menos de 3 registros <span>(limiar didático, não uma exigência legal)</span></label>
+
+          <div class="eca-metrics" aria-live="polite">
+            <p><strong id="ecaGroups">12</strong><span>combinações formadas</span></p>
+            <p><strong id="ecaSmall">12</strong><span>registros em grupos menores que 3</span></p>
+            <p><strong id="ecaVisible">12</strong><span>registros em grupos exibidos</span></p>
+          </div>
+          <div class="eca-chart" role="group" aria-label="Tamanho dos grupos no painel sintético">
+            <p class="chart-title">Tamanho de cada grupo</p>
+            <ol class="eca-bars" id="ecaBars"><li class="eca-bars__fallback">Faixa + setor + oficina: 12 grupos de 1 registro cada.</li></ol>
+          </div>
+          <p class="eca-summary" id="ecaSummary" aria-live="polite">Cada combinação descreve apenas um registro sintético. Nesta amostra, publicar todos os detalhes deixaria as 12 linhas singulares.</p>
+        </div>
+
+        <div class="eca-context">
+          <h3>O que o ECA Digital acrescenta</h3>
+          <p>O ECA Digital (Lei nº 15.211/2025), em vigor desde março de 2026, exige proteção prioritária e medidas proporcionais de privacidade, proteção de dados e segurança em produtos e serviços digitais direcionados a crianças e adolescentes ou provavelmente acessados por eles. Este experimento ensina a pensar no risco; ele não avalia a conformidade jurídica de uma plataforma.</p>
+          <p class="eca-context__source">Fontes: <a href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener noreferrer">ANPD: ECA Digital</a> e <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm" target="_blank" rel="noopener noreferrer">Lei nº 15.211/2025</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. RISCOS ===== -->
     <section class="section riscos" id="riscos" aria-labelledby="titulo-riscos" data-step>
       <div class="container riscos__grid">
         <div class="riscos__head">
@@ -208,7 +258,7 @@
       </div>
     </section>
 
-    <!-- ===== 5. TÉCNICAS: a tabela que troca de técnica ===== -->
+    <!-- ===== 6. TÉCNICAS: a tabela que troca de técnica ===== -->
     <section class="section tecnicas" id="tecnicas" aria-labelledby="titulo-tecnicas" data-step>
       <div class="container">
         <div class="tecnicas__head">
@@ -308,12 +358,12 @@
       </div>
     </section>
 
-    <!-- ===== 6. EQUIPE ===== -->
+    <!-- ===== 7. EQUIPE ===== -->
     <section class="section equipe" id="equipe" aria-labelledby="titulo-equipe" data-step>
       <div class="container equipe__grid">
-        <h2 id="titulo-equipe" class="equipe__title">Muito obrigado por ver esta apresentação!</h2>
+        <h2 id="titulo-equipe" class="equipe__title">Ciência de Dados para perguntar antes de publicar.</h2>
         <div>
-          <p class="equipe__intro">Pesquisa e apresentação:</p>
+          <p class="equipe__intro">Mostra Científica da EETEPA Vilhena Alves · trabalho da turma de Ciência de Dados · pesquisa e apresentação:</p>
           <ul class="equipe__nomes">
             <li>Miguel Rocca</li>
             <li>Christian Paraguassu</li>
@@ -332,9 +382,10 @@
       <p class="footer__mark">Anonimização de Dados</p>
       <ul class="footer__links">
         <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">Texto da LGPD</a></li>
+        <li><a href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener noreferrer">ECA Digital na ANPD</a></li>
         <li><a href="https://github.com/albertomateus9/anonimizacao-de-dados" target="_blank" rel="noopener noreferrer">Código no GitHub</a></li>
       </ul>
-      <p class="footer__note">Página inspirada nos projetos <a href="https://albertomateus9.github.io/VozesLivres/" target="_blank" rel="noopener noreferrer">Vozes Livres</a> e <a href="https://yankapa.github.io/projeto_antibullying_v2/" target="_blank" rel="noopener noreferrer">Contra o Bullying</a>. Os dados das tabelas são fictícios. Saiba mais sobre <a href="https://www.gov.br/gestao/pt-br/acesso-a-informacao/privacidade-e-protecao-de-dados/lgpd-no-mgi-1/anonimizacao" target="_blank" rel="noopener noreferrer">boas práticas de anonimização</a>.</p>
+      <p class="footer__note">Projeto da turma de Ciência de Dados da EETEPA Vilhena Alves. Todos os dados demonstrados são fictícios ou sintéticos; não há registros de estudantes reais. Saiba mais sobre <a href="https://www.gov.br/gestao/pt-br/acesso-a-informacao/privacidade-e-protecao-de-dados/lgpd-no-mgi-1/anonimizacao" target="_blank" rel="noopener noreferrer">boas práticas de anonimização</a>.</p>
     </div>
   </footer>
 

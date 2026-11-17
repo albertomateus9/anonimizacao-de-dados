@@ -165,6 +165,93 @@
     precision.addEventListener('change', () => renderRisk(precision.value));
   }
 
+  // Cenário da mostra: produto cartesiano de categorias inventadas. Nenhum dado
+  // de estudante real entra no experimento ou sai do navegador.
+  const ecaRecords = ['14–15 anos', '16–17 anos'].flatMap((age) =>
+    ['Setor A', 'Setor B'].flatMap((sector) =>
+      ['Robótica', 'Arte', 'Esporte'].map((activity) => ({ age, sector, activity }))
+    )
+  );
+  const ecaLab = $('#ecaLab');
+  const ecaFields = $$('#ecaLab input[name="eca-field"]');
+  const ecaSuppress = $('#ecaSuppress');
+  const ecaPresets = $$('#ecaPresets button');
+  const presets = {
+    all: ['age', 'sector', 'activity'],
+    age_activity: ['age', 'activity'],
+    activity: ['activity']
+  };
+  if (ecaLab && ecaFields.length === 3 && ecaSuppress) {
+    ecaLab.classList.add('is-enhanced');
+    function renderEca() {
+      const selected = ecaFields.filter((field) => field.checked).map((field) => field.value);
+      const groups = new Map();
+      ecaRecords.forEach((record) => {
+        const label = selected.length ? selected.map((field) => record[field]).join(' · ') : 'Todos os registros';
+        groups.set(label, (groups.get(label) || 0) + 1);
+      });
+      const small = [...groups.values()].filter((count) => count < 3).reduce((total, count) => total + count, 0);
+      const visible = [...groups.values()].filter((count) => !ecaSuppress.checked || count >= 3).reduce((total, count) => total + count, 0);
+      $('#ecaGroups').textContent = String(groups.size);
+      $('#ecaSmall').textContent = String(small);
+      $('#ecaVisible').textContent = String(visible);
+
+      const bars = $('#ecaBars');
+      bars.replaceChildren();
+      const scale = Math.max(4, ...groups.values());
+      groups.forEach((count, label) => {
+        if (ecaSuppress.checked && count < 3) return;
+        const item = document.createElement('li');
+        const name = document.createElement('span');
+        const bar = document.createElement('span');
+        const value = document.createElement('strong');
+        name.textContent = label;
+        bar.className = 'eca-bar';
+        bar.style.setProperty('--bar-width', `${count / scale * 100}%`);
+        bar.setAttribute('aria-hidden', 'true');
+        value.textContent = String(count);
+        item.append(name, bar, value);
+        bars.append(item);
+      });
+      if (!bars.children.length) {
+        const item = document.createElement('li');
+        item.className = 'eca-bars__empty';
+        item.textContent = 'Nenhum grupo aparece no painel com este critério.';
+        bars.append(item);
+      }
+      let summary;
+      if (ecaSuppress.checked && visible === 0) summary = `Os ${groups.size} grupos ficaram abaixo do limiar didático de 3 registros e seriam ocultados. O painel perde detalhe, mas não expõe essas células.`;
+      else if (ecaSuppress.checked) summary = `${ecaRecords.length - visible} registros seriam ocultados em grupos pequenos; ${visible} permaneceriam em grupos exibidos. É preciso avaliar outros riscos antes de publicar.`;
+      else if (small === 0) summary = `Nesta amostra, nenhum registro está em grupo menor que 3. Isso não garante anonimização: outras informações podem permitir associação.`;
+      else summary = `${small} dos ${ecaRecords.length} registros estão em grupos menores que 3. A combinação escolhida ainda pode facilitar a associação com outras fontes.`;
+      $('#ecaSummary').textContent = summary;
+      ecaPresets.forEach((button) => button.setAttribute('aria-pressed', String(JSON.stringify(selected) === JSON.stringify(presets[button.dataset.preset]))));
+    }
+    ecaFields.forEach((field) => field.addEventListener('change', renderEca));
+    ecaSuppress.addEventListener('change', renderEca);
+    ecaPresets.forEach((button) => button.addEventListener('click', () => {
+      ecaFields.forEach((field) => { field.checked = presets[button.dataset.preset].includes(field.value); });
+      ecaSuppress.checked = false;
+      renderEca();
+    }));
+    renderEca();
+  }
+
+  const readProgress = $('#readProgress');
+  if (readProgress) {
+    let scheduled = false;
+    function updateProgress() {
+      const distance = document.documentElement.scrollHeight - innerHeight;
+      readProgress.style.width = `${distance > 0 ? Math.min(100, Math.max(0, scrollY / distance * 100)) : 100}%`;
+      scheduled = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!scheduled) { scheduled = true; requestAnimationFrame(updateProgress); }
+    }, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  }
+
   // Marca a seção em leitura e permite avançar com as setas fora dos controles.
   const sections = $$('[data-step]');
   const sectionLinks = $$('.nav__links a');
