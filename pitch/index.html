@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Anonimização de Dados — Pitch Deck</title>
+<style>
+@font-face { font-family: "Newsreader"; font-weight: 600; src: url(fonts/newsreader-latin-600-normal.woff2); }
+@font-face { font-family: "Newsreader"; font-weight: 700; src: url(fonts/newsreader-latin-700-normal.woff2); }
+@font-face { font-family: "Public Sans"; font-weight: 400; src: url(fonts/public-sans-latin-400-normal.woff2); }
+@font-face { font-family: "Public Sans"; font-weight: 500; src: url(fonts/public-sans-latin-500-normal.woff2); }
+@font-face { font-family: "Public Sans"; font-weight: 700; src: url(fonts/public-sans-latin-700-normal.woff2); }
+@font-face { font-family: "Public Sans"; font-weight: 800; src: url(fonts/public-sans-latin-800-normal.woff2); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; src: url(fonts/jetbrains-mono-latin-400-normal.woff2); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 700; src: url(fonts/jetbrains-mono-latin-700-normal.woff2); }
+
+:root {
+  /* Mesmos tokens do site (css/tokens.css e css/game.css) */
+  --ink: oklch(25% 0.06 256); --ink-2: oklch(35% 0.055 256); --muted: oklch(47% 0.035 256);
+  --paper: oklch(97.6% 0.006 250); --paper-2: oklch(94.6% 0.013 250); --paper-3: oklch(91% 0.018 250); --rule: oklch(86% 0.02 250);
+  --accent: oklch(47% 0.115 2); --accent-soft: oklch(94% 0.025 2); --accent-mid: oklch(80% 0.08 2);
+  --band: oklch(25% 0.06 256); --band-ink: oklch(96% 0.01 250); --band-muted: oklch(80% 0.03 250); --band-rule: oklch(40% 0.05 256); --band-accent: oklch(80% 0.08 2);
+  --gold: oklch(80% 0.13 85); --gold-ink: oklch(32% 0.07 70); --good: oklch(50% 0.12 150); --good-soft: oklch(94% 0.04 150); --bad: oklch(52% 0.19 27);
+  --serif: "Newsreader", Georgia, serif; --sans: "Public Sans", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@page { size: 1280px 720px; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #888; }
+body { font-family: var(--sans); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.slide { position: relative; width: 1280px; height: 720px; overflow: hidden; background: var(--paper-2); padding: 56px 64px 0; page-break-after: always; break-after: page; }
+.slide:last-child { page-break-after: auto; break-after: auto; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; }
+h2 { font-size: 40px; margin-top: 6px; }
+.eyebrow { font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.sub { margin-top: 10px; font-size: 16px; color: var(--ink-2); }
+.foot { position: absolute; left: 64px; right: 64px; bottom: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); }
+.foot .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); }
+.mark { display: inline-grid; place-items: center; width: 32px; height: 22px; border-radius: 6px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+.foot .num { font-family: var(--mono); }
+.src { font-size: 11px; color: var(--muted); }
+.card { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 24px 26px; }
+.card h3 { font-family: var(--sans); font-size: 17px; font-weight: 800; letter-spacing: 0; }
+.card .cap { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.tarja { display: inline-block; height: 14px; border-radius: 3px; background: var(--ink); vertical-align: middle; }
+
+/* 1. Capa: mesma composição do hero do site */
+.cover { background: var(--paper); padding: 64px 72px; }
+.cover .wm { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 600; }
+.cover .wm .mark { width: 50px; height: 34px; font-size: 14px; }
+.cover .eyebrow { margin-top: 70px; }
+.cover h1 { margin-top: 18px; font-size: 92px; line-height: .98; letter-spacing: -0.03em; }
+.cover .tag { margin-top: 24px; max-width: 520px; font-size: 21px; line-height: 1.45; color: var(--ink-2); }
+.cover .meta { position: absolute; left: 72px; bottom: 56px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.cover .meta strong { color: var(--ink); }
+.redact { position: absolute; right: 72px; top: 150px; width: 480px; padding: 28px 30px; border-radius: 6px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); box-shadow: 0 1px 2px oklch(20% 0.03 256 / 0.06), 0 24px 50px oklch(25% 0.06 256 / 0.12); }
+.redact .cap2 { font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.2; padding-bottom: 16px; }
+.redact .rh { display: grid; grid-template-columns: 104px 1fr 1fr; gap: 12px; font-size: 12px; color: var(--muted); padding-bottom: 10px; }
+.redact .row > * { white-space: nowrap; }
+.redact .row { display: grid; grid-template-columns: 104px 1fr 1fr; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--rule); font-size: 15px; }
+.redact .k { color: var(--muted); font-size: 13px; }
+.redact .after { font-family: var(--mono); font-weight: 700; color: var(--accent); }
+.redact .mono { font-family: var(--mono); }
+.redact .stamp { position: absolute; right: -16px; bottom: -18px; transform: rotate(-6deg); padding: 7px 14px; border-radius: 999px; background: var(--gold); color: var(--gold-ink); font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: .08em; }
+
+/* 2. Problema */
+.big-stat { margin-top: 18px; font-family: var(--serif); font-size: 76px; line-height: 1.02; letter-spacing: -0.03em; max-width: 1020px; }
+.big-stat em { font-style: normal; color: var(--accent); }
+.meter { margin-top: 44px; height: 30px; border-radius: 4px; background: var(--paper-3); overflow: hidden; position: relative; }
+.meter span { position: absolute; inset: 0 auto 0 0; border-radius: 4px; }
+.meter .a { width: 32%; background: var(--accent-mid); }
+.meter .b { width: 20%; background: var(--accent); }
+.meter-legend { display: flex; justify-content: space-between; margin-top: 12px; font-size: 13px; }
+.meter-legend .l { display: flex; gap: 22px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+
+/* 3/4. Números */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 24px; }
+.two .card { height: 470px; position: relative; }
+.card .src { position: absolute; left: 26px; right: 26px; bottom: 18px; }
+.cols { display: flex; align-items: flex-end; gap: 22px; height: 300px; margin-top: 22px; padding: 0 6px; border-bottom: 2px solid var(--ink); }
+.col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.col b { font-size: 15px; font-weight: 800; margin-bottom: 6px; white-space: nowrap; }
+.col i { display: block; width: 100%; border-radius: 3px 3px 0 0; background: var(--accent-mid); }
+.col.hot i { background: var(--accent); }
+.yrs { display: flex; gap: 22px; padding: 6px 6px 0; }
+.yrs span { flex: 1; text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.callout { margin-top: 14px; font-size: 14px; font-weight: 800; color: var(--accent); }
+.dots { display: grid; grid-template-columns: repeat(10, 18px); gap: 6px; }
+.dots i { width: 18px; height: 18px; border-radius: 50%; background: var(--paper-3); }
+.dots i.on { background: var(--accent); }
+.dotwrap { display: flex; align-items: center; gap: 30px; margin-top: 28px; }
+.figure { font-family: var(--serif); font-size: 64px; line-height: 1; color: var(--accent); }
+.fig-cap { margin-top: 8px; font-size: 14px; line-height: 1.4; color: var(--ink-2); max-width: 230px; }
+.mini { margin-top: 22px; display: grid; gap: 10px; }
+.mini p { display: flex; align-items: baseline; gap: 12px; font-size: 14px; color: var(--ink-2); padding-top: 10px; border-top: 1px solid var(--rule); }
+.mini strong { font-family: var(--serif); font-size: 26px; color: var(--ink); min-width: 64px; }
+.hbars { margin-top: 26px; display: grid; gap: 22px; }
+.hbar .t { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; }
+.hbar .t span:last-child { font-family: var(--mono); color: var(--accent); }
+.hbar .track { margin-top: 8px; height: 16px; border-radius: 3px; background: var(--paper-3); }
+.hbar .track i { display: block; height: 100%; border-radius: 3px; background: var(--accent); }
+.hbar .d { margin-top: 6px; font-size: 12px; color: var(--muted); }
+.donut { display: flex; align-items: center; gap: 30px; margin-top: 30px; }
+.donut svg { width: 220px; height: 220px; flex: none; }
+.donut .lbl { font-family: var(--serif); font-size: 56px; color: var(--accent); line-height: 1; }
+
+.reid { margin-top: 22px; }
+.reid__num { font-family: var(--serif); font-size: 84px; line-height: .95; letter-spacing: -0.03em; color: var(--accent); }
+.reid__cap { margin-top: 10px; max-width: 470px; font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+.reid__lbl { margin-top: 22px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.reid__tok { display: grid; grid-template-columns: repeat(15, 1fr); gap: 5px; margin-top: 8px; }
+.reid__tok i { height: 30px; border-radius: 4px; background: var(--accent); font-style: normal; }
+.reid__tok i:nth-child(-n+3) { background: var(--ink); }
+.reid__ex { margin-top: 6px; font-size: 12px; color: var(--muted); }
+.reid__odds { display: flex; align-items: center; gap: 14px; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.reid__odds strong { font-family: var(--serif); font-size: 44px; line-height: 1; color: var(--ink); }
+.reid__odds span { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+
+/* 5. Solução */
+.sol { display: grid; grid-template-columns: 470px 1fr; gap: 46px; align-items: center; height: 560px; }
+.sol h2 { font-size: 56px; }
+.sol .tag2 { margin-top: 16px; font-family: var(--serif); font-size: 26px; line-height: 1.2; color: var(--accent); font-weight: 600; }
+.sol p.d { margin-top: 16px; font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.chips span { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 800; }
+.browser { border-radius: 6px; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 24px 50px rgba(23,35,63,.18); overflow: hidden; }
+.browser .bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--paper-2); border-bottom: 1px solid var(--rule); }
+.browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--paper-3); }
+.browser .bar span { flex: 1; margin-left: 10px; padding: 5px 12px; border-radius: 999px; background: var(--paper); font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: center; }
+.browser img { display: block; width: 100%; }
+
+/* 6. Experiências */
+.pillars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-top: 24px; }
+.pillar { position: relative; height: 352px; padding: 20px 18px; border-radius: 6px; background: var(--paper); border: 1px solid var(--rule); }
+.pillar .ic { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 6px; background: var(--ink); color: var(--paper); font-family: var(--mono); font-weight: 700; font-size: 17px; }
+.pillar .n { margin-top: 16px; font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--accent); }
+.pillar h3 { margin-top: 4px; font-family: var(--sans); font-size: 17px; font-weight: 800; letter-spacing: 0; line-height: 1.2; }
+.pillar p { margin-top: 10px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.pillar .pt { position: absolute; left: 18px; right: 18px; bottom: 18px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 11px; font-weight: 800; color: var(--accent); }
+.band { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 16px 22px; border-radius: 6px; background: var(--band); color: var(--band-ink); font-size: 15px; font-weight: 800; }
+.band span:last-child { font-size: 12px; font-weight: 500; color: var(--band-muted); }
+
+/* 7. Detalhe k */
+.kcards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 26px; }
+.kc { position: relative; height: 320px; padding: 22px 20px; border-radius: 6px; background: var(--paper); border: 1px solid var(--rule); }
+.kc .kv { font-family: var(--serif); font-size: 52px; line-height: 1; color: var(--accent); }
+.kc.risk .kv { color: var(--bad); }
+.kc.ok .kv { color: var(--good); }
+.kc h3 { margin-top: 14px; font-family: var(--sans); font-size: 15px; font-weight: 800; letter-spacing: 0; line-height: 1.25; }
+.kc p { margin-top: 8px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+.kc .util { position: absolute; left: 20px; right: 20px; bottom: 20px; }
+.kc .util .t { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.kc .util .tr { margin-top: 6px; height: 8px; border-radius: 4px; background: var(--paper-3); }
+.kc .util .tr i { display: block; height: 100%; border-radius: 4px; background: var(--gold); }
+.kc.best { border: 2px solid var(--good); background: var(--good-soft); }
+.kc .badge { position: absolute; top: 20px; right: 18px; padding: 3px 9px; border-radius: 999px; background: var(--gold); color: var(--gold-ink); font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+
+/* 8. Telas */
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 18px; margin-top: 22px; }
+.shot img { display: block; width: 100%; border-radius: 6px; border: 1px solid var(--rule); box-shadow: 0 8px 18px rgba(23,35,63,.12); }
+.shot p { margin-top: 8px; font-size: 13px; font-weight: 800; text-align: center; }
+
+/* 9. Gamificação */
+.game { display: grid; grid-template-columns: 520px 1fr; gap: 34px; margin-top: 24px; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tile { height: 140px; padding: 18px 20px; border-radius: 6px; background: var(--paper); border: 1px solid var(--rule); }
+.tile b { display: block; font-family: var(--serif); font-size: 44px; line-height: 1; color: var(--accent); }
+.tile strong { display: block; margin-top: 8px; font-size: 15px; font-weight: 800; }
+.tile span { display: block; margin-top: 4px; font-size: 12px; line-height: 1.4; color: var(--ink-2); }
+.tile.gold { background: color-mix(in oklab, var(--gold) 14%, var(--paper)); border-color: var(--gold); }
+.tile.gold b { color: var(--gold-ink); }
+.game .browser { align-self: start; }
+
+/* 10. Tecnologia */
+.tech { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+.tech .card { height: 196px; }
+.tech .card h3 { font-size: 19px; }
+.tech .card p { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 500px; }
+.tech .ic { float: right; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 6px; background: var(--paper-2); font-family: var(--mono); font-weight: 700; color: var(--accent); font-size: 15px; }
+
+/* 11. Protótipo */
+.proto { display: grid; grid-template-columns: 740px 300px; gap: 72px; margin-top: 22px; align-items: start; }
+.qr { padding: 22px; border-radius: 6px; background: var(--paper); border: 1px solid var(--rule); text-align: center; }
+.qr img { width: 190px; height: 190px; }
+.qr strong { display: block; margin-top: 12px; font-size: 16px; font-weight: 800; }
+.qr span { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); font-family: var(--mono); word-break: break-all; }
+.steps { margin-top: 18px; display: grid; gap: 10px; }
+.steps p { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-2); }
+.steps b { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--paper); font-family: var(--mono); font-size: 12px; }
+.steps kbd { padding: 1px 6px; border: 1px solid var(--ink-2); border-radius: 4px; font-family: var(--mono); font-size: 12px; }
+
+/* 12. Roadmap */
+.road { margin-top: 34px; display: grid; gap: 20px; }
+.road p { display: flex; align-items: center; gap: 20px; font-size: 19px; color: var(--ink); }
+.road b { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 6px; background: var(--accent); color: var(--paper); font-family: var(--mono); font-size: 14px; }
+.road span { color: var(--muted); font-size: 15px; margin-left: 6px; }
+
+/* 13. Fechamento: faixa escura do site */
+.close { background: var(--band); color: var(--band-ink); padding: 64px 72px; }
+.close .wm { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 22px; font-weight: 600; }
+.close .wm .mark { width: 50px; height: 34px; font-size: 14px; background: var(--paper); color: var(--ink); }
+.close .eyebrow { margin-top: 64px; color: var(--band-accent); }
+.close h1 { margin-top: 16px; font-size: 80px; line-height: .98; letter-spacing: -0.03em; max-width: 640px; color: var(--band-ink); }
+.close .lead { margin-top: 24px; max-width: 560px; font-size: 18px; line-height: 1.5; color: var(--band-muted); }
+.close .lead .url { white-space: nowrap; font-family: var(--mono); font-size: 16px; color: var(--band-ink); }
+.close .qr { position: absolute; right: 72px; top: 120px; width: 290px; color: var(--ink); }
+.close .bottom { position: absolute; left: 72px; right: 72px; bottom: 44px; display: flex; justify-content: space-between; align-items: flex-end; padding-top: 18px; border-top: 1px solid var(--band-rule); font-size: 13px; line-height: 1.6; color: var(--band-muted); }
+.close .bottom strong { color: var(--band-ink); font-size: 15px; }
+.close .bottom .r { text-align: right; }
+
+/* ---------- Apresentação na web: um slide por vez, escalado para a tela ---------- */
+@media screen {
+  html, body { height: 100%; overflow: hidden; background: var(--band); }
+  .slide { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(var(--s, 1)); opacity: 0; visibility: hidden; transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms; box-shadow: 0 30px 80px oklch(10% 0.04 256 / 0.5); }
+  .slide.is-active { opacity: 1; visibility: visible; }
+  .pbar { position: fixed; left: 0; top: 0; height: 4px; width: 0; background: var(--accent); z-index: 10; transition: width 320ms cubic-bezier(0.16, 1, 0.3, 1); }
+  .ctrl { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 10; display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 999px; background: oklch(25% 0.06 256 / 0.92); border: 1px solid var(--band-rule); color: var(--band-ink); font-family: var(--sans); box-shadow: 0 10px 30px oklch(10% 0.04 256 / 0.4); transition: opacity 400ms, transform 400ms; }
+  .ctrl.is-idle { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+  .ctrl button, .ctrl a { display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; min-width: 40px; height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: inherit; font: 700 14px var(--sans); text-decoration: none; cursor: pointer; }
+  .ctrl button:hover, .ctrl a:hover { background: var(--band-rule); }
+  .ctrl button:disabled { opacity: .35; cursor: default; background: transparent; }
+  .ctrl button:focus-visible, .ctrl a:focus-visible { outline: 2px solid var(--band-accent); outline-offset: 2px; }
+  .ctrl .count { min-width: 64px; text-align: center; font-family: var(--mono); font-size: 13px; }
+  .ctrl kbd { margin-left: 6px; padding: 0 5px; border: 1px solid currentColor; border-radius: 4px; font: 400 11px var(--mono); opacity: .8; }
+  .ctrl .sep { width: 1px; height: 22px; background: var(--band-rule); }
+  .hint { position: fixed; left: 50%; top: 22px; transform: translateX(-50%); z-index: 10; padding: 10px 18px; border-radius: 999px; background: var(--gold); color: var(--gold-ink); font: 700 14px var(--sans); transition: opacity 600ms; }
+  .hint.is-gone { opacity: 0; pointer-events: none; }
+}
+@media print { .pbar, .ctrl, .hint { display: none !important; } }
+@media screen and (prefers-reduced-motion: reduce) { .slide, .pbar, .ctrl { transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- 1. CAPA -->
+<section class="slide cover">
+  <p class="wm"><span class="mark">***</span>Anonimização de Dados</p>
+  <p class="eyebrow">Mostra Científica · EETEPA Vilhena Alves</p>
+  <h1>Anonimização<br>de Dados</h1>
+  <p class="tag">Se uma tabela não tem nomes, ela está segura? Explore os dados, jogue e descubra por que o contexto importa.</p>
+  <div class="redact">
+    <p class="cap2">Um cadastro antes e depois da transformação</p>
+    <div class="rh"><span>Campo</span><span>Antes</span><span>Depois</span></div>
+    <div class="row"><span class="k">Nome completo</span><span><i class="tarja" style="width:120px"></i></span><span class="after">FM</span></div>
+    <div class="row"><span class="k">CPF</span><span class="mono">111.111.111-11</span><span class="after">111.***.***-11</span></div>
+    <div class="row"><span class="k">Cidade</span><span>Rio Branco</span><span class="after">Acre</span></div>
+    <div class="row"><span class="k">Idade</span><span class="mono">79</span><span class="after">70 a 79</span></div>
+    <div class="stamp">DADOS FICTÍCIOS</div>
+  </div>
+  <p class="meta"><strong>Desenvolvido pela turma de Ciência de Dados</strong><br>EETEPA Vilhena Alves</p>
+</section>
+
+<!-- 2. PROBLEMA -->
+<section class="slide">
+  <p class="eyebrow">O problema</p>
+  <p class="big-stat"><em>45 milhões</em> de brasileiros sofreram tentativas de golpe com os próprios dados pessoais em 2025.</p>
+  <div class="meter"><span class="a"></span><span class="b"></span></div>
+  <div class="meter-legend">
+    <div class="l"><span><i class="dot" style="background:var(--accent-mid)"></i><strong>32%</strong> dos usuários de internet sofreram tentativas</span><span><i class="dot" style="background:var(--accent)"></i><strong>20%</strong> foram vítimas efetivas</span></div>
+    <span class="src">Cetic.br/NIC.br, Privacidade e Proteção de Dados Pessoais 2025 · usuários de 16 anos ou mais</span>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">2</span></div>
+</section>
+
+<!-- 3. NÚMEROS: golpes -->
+<section class="slide">
+  <p class="eyebrow">Os números</p>
+  <h2>Golpe virou o principal crime patrimonial do país</h2>
+  <div class="two">
+    <div class="card">
+      <h3>Estelionatos registrados no Brasil</h3>
+      <p class="cap">Boletins de ocorrência por ano</p>
+      <div class="cols">
+        <div class="col"><b>426.799</b><i style="height:19%"></i></div>
+        <div class="col"><b>927.898</b><i style="height:41%"></i></div>
+        <div class="col"><b>2.166.552</b><i style="height:96%"></i></div>
+        <div class="col hot"><b>2.261.055</b><i style="height:100%"></i></div>
+      </div>
+      <div class="yrs"><span>2018</span><span>2020</span><span>2024</span><span>2025</span></div>
+      <p class="callout">258 golpes por hora em 2025 · alta de 429,8% desde 2018</p>
+      <p class="src">FBSP, Anuário Brasileiro de Segurança Pública (2025 e 2026)</p>
+    </div>
+    <div class="card">
+      <h3>Como o golpe chega</h3>
+      <p class="cap">Entre quem sofreu tentativa ou golpe com dados pessoais</p>
+      <div class="dotwrap">
+        <div class="dots">
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+          <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div><p class="figure">84%</p><p class="fig-cap">foram abordados por aplicativos de mensagem, como WhatsApp e Telegram</p></div>
+      </div>
+      <div class="mini">
+        <p><strong>39%</strong>relataram tentativas de golpe contra parentes</p>
+      </div>
+      <p class="src">Cetic.br/NIC.br, Privacidade e Proteção de Dados Pessoais 2025</p>
+    </div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">3</span></div>
+</section>
+
+<!-- 4. NÚMEROS: reidentificação -->
+<section class="slide">
+  <p class="eyebrow">Os números</p>
+  <h2>Sem nome não quer dizer anônimo</h2>
+  <div class="two">
+    <div class="card">
+      <h3>Três dados comuns já bastam</h3>
+      <p class="cap">População dos EUA com combinação única destes dados</p>
+      <div class="hbars">
+        <div class="hbar"><p class="t"><span>CEP + gênero + data de nascimento</span><span>87%</span></p><div class="track"><i style="width:87%"></i></div></div>
+        <div class="hbar"><p class="t"><span>Cidade + gênero + data de nascimento</span><span>53%</span></p><div class="track"><i style="width:53%"></i></div></div>
+        <div class="hbar"><p class="t"><span>Condado + gênero + data de nascimento</span><span>18%</span></p><div class="track"><i style="width:18%"></i></div><p class="d">Quanto mais preciso o local, mais fácil achar a pessoa.</p></div>
+      </div>
+      <div class="reid__odds" style="margin-top:34px"><strong style="white-space:nowrap;font-size:38px">Quase 9 em 10</strong><span>pessoas podiam ser identificadas<br>com só três dados, sem nome nenhum.</span></div>
+      <p class="src">Latanya Sweeney, Simple Demographics Often Identify People Uniquely (2000)</p>
+    </div>
+    <div class="card">
+      <h3>Com mais atributos, quase todos</h3>
+      <p class="cap">Reidentificação estimada em bases “anonimizadas”</p>
+      <div class="reid">
+        <p class="reid__num">99,98%</p>
+        <p class="reid__cap">dos norte-americanos seriam <strong>reidentificados corretamente</strong> em qualquer base “anonimizada”.</p>
+        <p class="reid__lbl">15 atributos demográficos</p>
+        <div class="reid__tok"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="reid__ex">como idade, gênero e estado civil</p>
+        <div class="reid__odds"><strong>2</strong><span>em cada 10.000 pessoas escapariam.<br>As outras 9.998 seriam encontradas.</span></div>
+      </div>
+      <p class="src">Rocher, Hendrickx e de Montjoye, Nature Communications (2019)</p>
+    </div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">4</span></div>
+</section>
+
+<!-- 5. SOLUÇÃO -->
+<section class="slide">
+  <p class="eyebrow">A solução</p>
+  <div class="sol">
+    <div>
+      <h2>Anonimização de Dados</h2>
+      <p class="tag2">Um laboratório no navegador para mexer nos dados antes de publicar.</p>
+      <p class="d">O público testa decisões de publicação, tenta reidentificar pessoas numa tabela sem nomes e aprende técnicas de proteção, com a LGPD e o ECA Digital como pano de fundo.</p>
+      <div class="chips"><span>✓ Sem cadastro</span><span>✓ Dados 100% fictícios</span><span>✓ Roda no navegador</span><span>✓ Gratuito</span></div>
+    </div>
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>albertomateus9.github.io/anonimizacao-de-dados</span></div><img src="img/s1-hero.jpg" alt=""></div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">5</span></div>
+</section>
+
+<!-- 6. EXPERIÊNCIAS -->
+<section class="slide">
+  <p class="eyebrow">O que você encontra</p>
+  <h2>Seis experiências, um único site</h2>
+  <div class="pillars">
+    <div class="pillar"><span class="ic">k</span><p class="n">01</p><h3>Laboratório de grupos</h3><p>Escolha como publicar local e idade e veja o menor grupo mudar na hora.</p><p class="pt">k-anonimato</p></div>
+    <div class="pillar"><span class="ic">?</span><p class="n">02</p><h3>Detetive</h3><p>Use a pista de um jornal para achar uma pessoa numa tabela sem nomes.</p><p class="pt">Ataque de ligação</p></div>
+    <div class="pillar"><span class="ic">▮</span><p class="n">03</p><h3>Caça aos identificadores</h3><p>Separe o que identifica alguém diretamente do que pode ficar no banco.</p><p class="pt">Conceito e LGPD</p></div>
+    <div class="pillar"><span class="ic">≤3</span><p class="n">04</p><h3>Painel do ECA Digital</h3><p>Publique dados sintéticos de adolescentes sem expor grupos pequenos.</p><p class="pt">Supressão</p></div>
+    <div class="pillar"><span class="ic">⛓</span><p class="n">05</p><h3>Vazou, virou golpe</h3><p>Ligue cada dado vazado ao golpe que ele facilita.</p><p class="pt">Prevenção</p></div>
+    <div class="pillar"><span class="ic">⚡</span><p class="n">06</p><h3>Desafio relâmpago</h3><p>Oito perguntas com tempo, bônus por sequência e placar da mostra.</p><p class="pt">Quiz final</p></div>
+  </div>
+  <div class="band"><span>Cada experiência rende XP e conquistas, sem usar dados de ninguém.</span><span>A seguir: o laboratório de grupos em detalhe →</span></div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">6</span></div>
+</section>
+
+<!-- 7. DETALHE: k-anonimato -->
+<section class="slide">
+  <p class="eyebrow">Experiência 01 · Laboratório de grupos</p>
+  <h2>Quanto detalhe dá para publicar sem deixar ninguém sozinho?</h2>
+  <p class="sub">Seis registros fictícios. k é o tamanho do menor grupo: com k = 1, alguém fica sozinho e pode ser encontrado.</p>
+  <div class="kcards">
+    <div class="kc risk"><p class="kv">k = 1</p><h3>Cidade + idade exata</h3><p>Os 6 registros ficam sozinhos em seus grupos.</p><div class="util"><p class="t"><span>Detalhe</span><span>100%</span></p><div class="tr"><i style="width:100%"></i></div></div></div>
+    <div class="kc risk"><p class="kv">k = 1</p><h3>Estado + faixa de 10 anos</h3><p>Generalizar ainda deixa os 6 sozinhos nesta amostra.</p><div class="util"><p class="t"><span>Detalhe</span><span>57%</span></p><div class="tr"><i style="width:57%"></i></div></div></div>
+    <div class="kc ok"><p class="kv">k = 2</p><h3>Região, sem idade</h3><p>Ninguém sozinho, mas sobra pouca informação.</p><div class="util"><p class="t"><span>Detalhe</span><span>14%</span></p><div class="tr"><i style="width:14%"></i></div></div></div>
+    <div class="kc ok best"><span class="badge">Missão</span><p class="kv">k = 2</p><h3>Estado, sem idade</h3><p>O máximo de detalhe possível sem deixar ninguém sozinho.</p><div class="util"><p class="t"><span>Detalhe</span><span>29%</span></p><div class="tr"><i style="width:29%"></i></div></div></div>
+    <div class="kc"><p class="kv">k = 6</p><h3>Sem local e sem idade</h3><p>Todos no mesmo grupo: seguro, mas inútil para estudar.</p><div class="util"><p class="t"><span>Detalhe</span><span>0%</span></p><div class="tr"><i style="width:0%"></i></div></div></div>
+  </div>
+  <div class="band"><span>Em amostras pequenas, proteger custa caro: é preciso avaliar o risco antes de publicar.</span><span>Percentuais calculados pelo próprio site</span></div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">7</span></div>
+</section>
+
+<!-- 8. TELAS -->
+<section class="slide">
+  <p class="eyebrow">Telas do site</p>
+  <h2>Um passeio pela apresentação</h2>
+  <div class="shots">
+    <div class="shot"><img src="img/s1-hero.jpg" alt=""><p>Abertura</p></div>
+    <div class="shot"><img src="img/s2-lab.jpg" alt=""><p>Laboratório de grupos</p></div>
+    <div class="shot"><img src="img/s3-det.jpg" alt=""><p>Detetive</p></div>
+    <div class="shot"><img src="img/s4-hunt.jpg" alt=""><p>Caça aos identificadores</p></div>
+    <div class="shot"><img src="img/s5-eca.jpg" alt=""><p>Painel do ECA Digital</p></div>
+    <div class="shot"><img src="img/s8-quiz.jpg" alt=""><p>Desafio relâmpago</p></div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">8</span></div>
+</section>
+
+<!-- 9. GAMIFICAÇÃO -->
+<section class="slide">
+  <p class="eyebrow">Gamificação</p>
+  <h2>Aprender jogando, do primeiro clique ao placar</h2>
+  <div class="game">
+    <div class="tiles">
+      <div class="tile gold"><b>14</b><strong>conquistas</strong><span>Uma para cada descoberta, do detetive à máscara perfeita.</span></div>
+      <div class="tile"><b>4</b><strong>níveis</strong><span>De Aprendiz de dados a Especialista em privacidade.</span></div>
+      <div class="tile"><b>8 × 20 s</b><strong>desafio relâmpago</strong><span>Responder rápido dá bônus de pontos.</span></div>
+      <div class="tile"><b>×2</b><strong>bônus por sequência</strong><span>Três acertos seguidos dobram os pontos.</span></div>
+      <div class="tile"><b>1º</b><strong>placar da mostra</strong><span>Por apelido, salvo só no computador do estande.</span></div>
+      <div class="tile"><b>P</b><strong>modo apresentação</strong><span>Tela cheia em 1920x1080, com setas para trocar de slide.</span></div>
+    </div>
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>Painel de conquistas</span></div><img src="img/s9-conq.jpg" alt=""></div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">9</span></div>
+</section>
+
+<!-- 10. TECNOLOGIA -->
+<section class="slide">
+  <p class="eyebrow">Como funciona por trás</p>
+  <h2>Tecnologia simples, aberta e que não coleta dados</h2>
+  <div class="tech">
+    <div class="card"><span class="ic">&lt;/&gt;</span><h3>HTML, CSS e JavaScript puros</h3><p>Sem instalação nem build: o mesmo arquivo abre no computador do estande e é publicado no GitHub Pages.</p></div>
+    <div class="card"><span class="ic">◎</span><h3>Tudo acontece no navegador</h3><p>Cálculos, XP, conquistas e placar ficam no próprio aparelho. Nada é enviado para servidores.</p></div>
+    <div class="card"><span class="ic">***</span><h3>Dados fictícios e sintéticos</h3><p>Nenhum registro de estudante real. O limiar de 3 registros no painel do ECA Digital é didático, não uma exigência legal.</p></div>
+    <div class="card"><span class="ic">A+</span><h3>Acessível e responsivo</h3><p>Alto contraste, ajuste de texto, navegação por teclado e telas de 320 a 2560 px. Sem JavaScript, o conteúdo continua legível.</p></div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">10</span></div>
+</section>
+
+<!-- 11. PROTÓTIPO NO AR -->
+<section class="slide">
+  <p class="eyebrow">Protótipo funcional</p>
+  <h2>Do código ao navegador: já está no ar</h2>
+  <p class="sub">Cada atualização enviada ao GitHub publica a nova versão no GitHub Pages.</p>
+  <div class="proto">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>albertomateus9.github.io/anonimizacao-de-dados</span></div><img src="img/s2-lab.jpg" alt=""></div>
+    <div>
+      <div class="qr"><img src="img/qr.svg" alt=""><strong>Acesse o site</strong><span>Aponte a câmera do celular</span></div>
+      <div class="steps">
+        <p><b>1</b>Abra o site no computador do estande.</p>
+        <p><b>2</b>Tecle <kbd>P</kbd> para a tela cheia.</p>
+        <p><b>3</b>Use <kbd>←</kbd> <kbd>→</kbd> para trocar de slide.</p>
+        <p><b>4</b>No fim, toque em “Novo visitante”.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">11</span></div>
+</section>
+
+<!-- 12. ROADMAP -->
+<section class="slide">
+  <p class="eyebrow">Próximos passos</p>
+  <h2>Roadmap</h2>
+  <div class="road">
+    <p><b>01</b>Modo competição por equipes no telão da sala.</p>
+    <p><b>02</b>Novas técnicas no laboratório, como privacidade diferencial.</p>
+    <p><b>03</b>Roteiro de aula para professores aplicarem os experimentos com suas turmas.</p>
+    <p><b>04</b>Banco de perguntas maior, com níveis de dificuldade no desafio.</p>
+    <p><b>05</b>Mais acessibilidade: audiodescrição dos gráficos e versão em Libras.</p>
+  </div>
+  <div class="foot"><span class="brand"><span class="mark">***</span>Anonimização de Dados</span><span class="num">12</span></div>
+</section>
+
+<!-- 13. FECHAMENTO -->
+<section class="slide close">
+  <p class="wm"><span class="mark">***</span>Anonimização de Dados</p>
+  <p class="eyebrow">Ciência de Dados para perguntar antes de publicar</p>
+  <h1>Antes de publicar, pergunte.</h1>
+  <p class="lead">Explore os dados no navegador ou aponte a câmera para o QR code:<br><span class="url">albertomateus9.github.io/anonimizacao-de-dados</span></p>
+  <div class="qr"><img src="img/qr.svg" alt="QR code do site"><strong>Acesse o site</strong><span>Funciona no celular e no computador</span></div>
+  <div class="bottom">
+    <div><strong>EETEPA Vilhena Alves</strong><br>Desenvolvido pela turma de Ciência de Dados · Mostra Científica</div>
+    <div class="r">github.com/albertomateus9/anonimizacao-de-dados<br>Todos os dados demonstrados são fictícios</div>
+  </div>
+</section>
+
+
+<div class="pbar" id="pbar" aria-hidden="true"></div>
+<p class="hint" id="hint">Tecle <strong>P</strong> para tela cheia e use as setas ← → para passar</p>
+<nav class="ctrl" id="ctrl" aria-label="Controles da apresentação">
+  <button type="button" id="prev" aria-label="Slide anterior">←</button>
+  <span class="count" id="count" aria-live="polite">1 / 13</span>
+  <button type="button" id="next" aria-label="Próximo slide">→</button>
+  <span class="sep" aria-hidden="true"></span>
+  <button type="button" id="full" aria-pressed="false">Tela cheia<kbd>P</kbd></button>
+  <a href="AnonimizacaoDeDados_PitchDeck.pdf" download>PDF</a>
+  <a href="../">Site</a>
+</nav>
+<script>
+(() => {
+  'use strict';
+  const slides = [...document.querySelectorAll('.slide')];
+  const root = document.documentElement;
+  const count = document.getElementById('count');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const full = document.getElementById('full');
+  const ctrl = document.getElementById('ctrl');
+  const hint = document.getElementById('hint');
+  let current = 0;
+
+  function fit() {
+    const scale = Math.min(innerWidth / 1280, innerHeight / 720);
+    root.style.setProperty('--s', String(scale));
+  }
+  function show(index, push = true) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => {
+      const active = i === current;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', String(!active));
+    });
+    count.textContent = `${current + 1} / ${slides.length}`;
+    prev.disabled = current === 0;
+    next.disabled = current === slides.length - 1;
+    document.getElementById('pbar').style.width = `${(current + 1) / slides.length * 100}%`;
+    if (push) history.replaceState(null, '', `#${current + 1}`);
+  }
+  async function toggleFull() {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await root.requestFullscreen({ navigationUI: 'hide' });
+    } catch { /* navegador sem tela cheia */ }
+  }
+  document.addEventListener('fullscreenchange', () => {
+    full.setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
+    fit();
+  });
+
+  // Esconde os controles depois de alguns segundos parado.
+  let idle;
+  function wake() {
+    ctrl.classList.remove('is-idle');
+    clearTimeout(idle);
+    idle = setTimeout(() => ctrl.classList.add('is-idle'), 2500);
+  }
+  ['mousemove', 'pointerdown', 'keydown', 'touchstart'].forEach((type) => addEventListener(type, wake, { passive: true }));
+  setTimeout(() => hint.classList.add('is-gone'), 5000);
+
+  prev.addEventListener('click', () => show(current - 1));
+  next.addEventListener('click', () => show(current + 1));
+  full.addEventListener('click', toggleFull);
+  document.addEventListener('keydown', (event) => {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    const key = event.key;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(key)) { event.preventDefault(); show(current + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(key)) { event.preventDefault(); show(current - 1); }
+    else if (key === 'Home') { event.preventDefault(); show(0); }
+    else if (key === 'End') { event.preventDefault(); show(slides.length - 1); }
+    else if (key === 'p' || key === 'P' || key === 'f' || key === 'F') { event.preventDefault(); toggleFull(); }
+    else return;
+    hint.classList.add('is-gone');
+  });
+  // Deslizar no celular.
+  let startX = null;
+  addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  addEventListener('touchend', (e) => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    startX = null;
+  }, { passive: true });
+
+  addEventListener('resize', fit);
+  addEventListener('hashchange', () => show(Number(location.hash.slice(1)) - 1 || 0, false));
+  fit();
+  show((Number(location.hash.slice(1)) || 1) - 1, false);
+  wake();
+})();
+</script>
+</body>
+</html>

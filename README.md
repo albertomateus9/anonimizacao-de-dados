@@ -10,6 +10,10 @@ Abra `index.html` no navegador. A apresentação funciona sem instalação ou bu
 
 Em telas a partir de 1600 px de largura, cada seção vira um slide do tamanho da tela. Tecle `P` (ou o botão **Apresentar**) para entrar em tela cheia; use `←` `→` ou `PageUp` `PageDown` para trocar de slide. No modo apresentação, `↑` e `↓` também trocam de slide. O contador no canto inferior direito mostra o slide atual.
 
+## Pitch deck
+
+A pasta `pitch/` traz o pitch deck do projeto em versão web, publicado em `/pitch/`. Tecle `P` para tela cheia e use as setas `←` `→` (ou `PageUp` `PageDown`, espaço) para passar os slides; no celular, deslize para os lados. O botão **PDF** baixa a mesma apresentação em PDF.
+
 ## Gamificação
 
 O visitante ganha XP e conquistas ao explorar cada slide:
