@@ -6,7 +6,7 @@ Apresentação educativa em página estática, baseada nos slides enviados pela 
 
 Abra `index.html` no navegador. A apresentação funciona sem instalação ou build. O JavaScript calcula, a partir dos seis registros fictícios da tabela, quantas combinações ficam únicas conforme o detalhe publicado muda. Também adiciona as abas das técnicas, o sorteio de valores fictícios, opções de leitura, menu para telas pequenas e navegação entre seções com as setas esquerda e direita.
 
-O layout usa uma coluna de leitura, margens fluidas e área de conteúdo de até 1440 px. A visualização foi conferida em 390 px, 768 px e 1920 × 1080.
+O layout usa margens fluidas e área de conteúdo de até 1440 px. Os textos mantêm uma largura confortável de leitura; cartões, tabelas e listas se ajustam à largura disponível e alguns grupos passam a duas colunas em telas largas. A visualização foi conferida de 320 px a 2560 px.
 
 ## Escopo dos exemplos
 
