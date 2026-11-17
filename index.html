@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anonimização de Dados | Apresentação sobre LGPD e técnicas de proteção</title>
+  <meta name="description" content="Apresentação sobre anonimização de dados: o que é, o que diz a LGPD, os riscos de um vazamento e três técnicas para proteger a identidade das pessoas.">
+  <meta name="theme-color" content="#f4f7fb">
+  <meta property="og:title" content="Anonimização de Dados">
+  <meta property="og:description" content="Como esconder quem é a pessoa sem apagar o que os dados ensinam.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Newsreader:opsz,wght@6..72,600&family=Public+Sans:wght@400;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Barra de acessibilidade: tamanho do texto e alto contraste (controlada pelo script.js) -->
+  <div class="a11y" role="region" aria-label="Opções de acessibilidade">
+    <div class="container a11y__row">
+      <p class="a11y__hint">Apresentando? Use as setas <kbd>←</kbd> <kbd>→</kbd> para trocar de seção.</p>
+      <div class="a11y__controls">
+        <button type="button" id="fontMinus" aria-label="Diminuir tamanho do texto">A−</button>
+        <button type="button" id="fontPlus" aria-label="Aumentar tamanho do texto">A+</button>
+        <button type="button" id="contrastBtn" aria-pressed="false">Alto contraste</button>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <nav class="container nav" aria-label="Menu principal">
+      <a class="wordmark" href="#inicio" aria-label="Anonimização de Dados, voltar ao início">
+        <span class="wordmark__mark" aria-hidden="true">***</span>
+        <span>Anonimização de Dados</span>
+      </a>
+      <button class="nav__menu" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="nav__links" id="navLinks">
+        <a href="#conceito">O que é</a>
+        <a href="#lgpd">LGPD</a>
+        <a href="#riscos">Riscos</a>
+        <a href="#tecnicas">Técnicas</a>
+        <a href="#equipe">Equipe</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ===== 1. INÍCIO ===== -->
+    <section class="hero" id="inicio" aria-labelledby="titulo-hero" data-step>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1 id="titulo-hero">Anonimização de Dados</h1>
+          <p class="lead">Como esconder quem é a pessoa sem apagar o que os dados ensinam.</p>
+          <div class="actions">
+            <a class="btn" href="#tecnicas">Ver as três técnicas</a>
+            <a class="text-link" href="#lgpd">O que diz a LGPD</a>
+          </div>
+          <p class="byline">Uma apresentação de Miguel Rocca, Christian Paraguassu, Carlos Eduardo, Emanuela, Pedro e João.</p>
+        </div>
+
+        <!-- A ficha: o mesmo cadastro antes e depois da anonimização -->
+        <figure class="ficha" aria-labelledby="ficha-legenda">
+          <table class="ficha__table">
+            <caption id="ficha-legenda">Um cadastro antes e depois da anonimização</caption>
+            <thead>
+              <tr><th scope="col">Campo</th><th scope="col">Antes</th><th scope="col">Depois</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Nome completo</th>
+                <td><span class="tarja" aria-hidden="true"></span><span class="visually-hidden">nome completo da pessoa</span></td>
+                <td class="data is-anon">FM</td>
+              </tr>
+              <tr>
+                <th scope="row">CPF</th>
+                <td class="data">111.111.111-11</td>
+                <td class="data is-anon">111.***.***-11</td>
+              </tr>
+              <tr>
+                <th scope="row">Cidade de nascimento</th>
+                <td>Rio Branco</td>
+                <td class="is-anon">Acre</td>
+              </tr>
+              <tr>
+                <th scope="row">Idade</th>
+                <td class="data">79</td>
+                <td class="data is-anon">70 a 79</td>
+              </tr>
+            </tbody>
+          </table>
+          <figcaption class="ficha__note">Dados de exemplo usados na apresentação.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== 2. O QUE É ===== -->
+    <section class="section conceito" id="conceito" aria-labelledby="titulo-conceito" data-step>
+      <div class="container conceito__grid">
+        <div class="conceito__text">
+          <h2 id="titulo-conceito">O que é anonimizar um dado</h2>
+          <p class="lead">É remover ou esconder as informações que permitem identificar uma pessoa específica em um banco de dados.</p>
+          <p>Para ser considerado anonimizado, o dado deve perder a possibilidade de associação direta ou indireta a alguém, considerando os meios técnicos razoáveis disponíveis no momento do tratamento.</p>
+        </div>
+        <div class="conceito__lists">
+          <div class="conceito__col">
+            <h3>Sai do banco</h3>
+            <ul class="saem">
+              <li><span>Nome completo</span><span class="tarja" aria-hidden="true"></span></li>
+              <li><span>CPF</span><span class="tarja" aria-hidden="true"></span></li>
+              <li><span>Endereço</span><span class="tarja" aria-hidden="true"></span></li>
+              <li><span>Telefone</span><span class="tarja" aria-hidden="true"></span></li>
+              <li><span>E-mail</span><span class="tarja" aria-hidden="true"></span></li>
+            </ul>
+          </div>
+          <div class="conceito__col">
+            <h3>Fica no banco</h3>
+            <p class="fica__intro">As informações gerais, úteis para:</p>
+            <ul class="ficam">
+              <li>Estudos</li>
+              <li>Estatísticas</li>
+              <li>Melhoria de serviços</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. LGPD ===== -->
+    <section class="band" id="lgpd" aria-labelledby="titulo-lgpd" data-step>
+      <div class="container">
+        <h2 id="titulo-lgpd">A lei que protege seus dados</h2>
+        <p class="statement">A LGPD obriga as empresas a cuidar das informações pessoais e pune quem deixa esses dados desprotegidos.</p>
+        <div class="lgpd__tools">
+          <article class="tool">
+            <h3>RIPD</h3>
+            <p class="tool__name">Relatório de Impacto à Proteção de Dados</p>
+            <p>Relatório que descreve o tratamento de dados pessoais, seus riscos e as medidas para reduzi-los. A ANPD recomenda sua elaboração em situações de alto risco e pode exigi-lo do controlador em casos previstos na LGPD.</p>
+          </article>
+          <article class="tool">
+            <h3>Risco de reidentificação</h3>
+            <p class="tool__name">Avaliação essencial da anonimização</p>
+            <p>Avalia se um dado que parece anônimo ainda pode ser ligado de volta a uma pessoa. Se puder, a privacidade não está realmente segura.</p>
+          </article>
+        </div>
+        <p class="band__source">Fontes: <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">LGPD, Lei nº 13.709/2018</a> e <a href="https://www.gov.br/anpd/pt-br/canais_atendimento/agente-de-tratamento/relatorio-de-impacto-a-protecao-de-dados-pessoais-ripd" target="_blank" rel="noopener noreferrer">orientações da ANPD sobre o RIPD</a>.</p>
+      </div>
+    </section>
+
+    <!-- ===== 4. RISCOS ===== -->
+    <section class="section riscos" id="riscos" aria-labelledby="titulo-riscos" data-step>
+      <div class="container riscos__grid">
+        <div class="riscos__head">
+          <h2 id="titulo-riscos">Quando um dado vaza</h2>
+          <p class="lead">Nome, CPF, telefone, endereço ou dados bancários nas mãos erradas podem virar:</p>
+        </div>
+        <ul class="riscos__list">
+          <li>Golpes financeiros e bancários</li>
+          <li>Clonagem de cartões</li>
+          <li>Falsos empréstimos em nome da vítima</li>
+          <li>Invasão de contas e redes sociais</li>
+          <li>Roubo de identidade e uso indevido das informações</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 5. TÉCNICAS: a tabela que troca de técnica ===== -->
+    <section class="section tecnicas" id="tecnicas" aria-labelledby="titulo-tecnicas" data-step>
+      <div class="container">
+        <div class="tecnicas__head">
+          <h2 id="titulo-tecnicas">Três técnicas na mesma tabela</h2>
+          <p class="lead">Escolha uma técnica e veja o que muda nos dados.</p>
+        </div>
+        <p class="tecnicas__aviso">As tabelas usam dados fictícios e mostram transformações didáticas. Uma técnica isolada não garante anonimização: é preciso avaliar a possibilidade de reidentificação, inclusive pela combinação com outros dados.</p>
+
+        <div class="switch" data-switch>
+          <div class="seg" role="tablist" aria-label="Técnicas de anonimização">
+            <button type="button" role="tab" id="tab-mascara" aria-controls="painel-mascara" aria-selected="true">Mascaramento</button>
+            <button type="button" role="tab" id="tab-general" aria-controls="painel-general" aria-selected="false" tabindex="-1">Generalização</button>
+            <button type="button" role="tab" id="tab-ruido" aria-controls="painel-ruido" aria-selected="false" tabindex="-1">Adição de ruído</button>
+          </div>
+
+          <!-- Mascaramento -->
+          <section class="painel" role="tabpanel" id="painel-mascara" aria-labelledby="tab-mascara" tabindex="0">
+            <div class="painel__info">
+              <h3>Mascaramento de caracteres</h3>
+              <p>Substitui parte dos dígitos ou letras por símbolos como <code>*</code> ou <code>#</code>. É comum em comprovantes e telas de atendimento. Um CPF parcial ainda pode permitir associação a uma pessoa.</p>
+              <dl class="exemplo">
+                <div><dt>Antes</dt><dd class="data">123.456.789-10</dd></div>
+                <div><dt>Depois</dt><dd class="data is-anon">***.456.789-**</dd></div>
+              </dl>
+            </div>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Tabela do mascaramento, role para os lados no celular">
+              <table class="dados">
+                <thead>
+                  <tr><th scope="col">Nome</th><th scope="col">CPF original</th><th scope="col">CPF mascarado</th><th scope="col" class="num">Idade</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">FM</th><td class="data">111.111.111-11</td><td class="data is-anon">111.***.***-11</td><td class="num">79</td></tr>
+                  <tr><th scope="row">AFB</th><td class="data">222.222.222-22</td><td class="data is-anon">222.***.***-22</td><td class="num">63</td></tr>
+                  <tr><th scope="row">LB</th><td class="data">333.333.333-33</td><td class="data is-anon">333.***.***-33</td><td class="num">91</td></tr>
+                  <tr><th scope="row">MTL</th><td class="data">444.444.444-44</td><td class="data is-anon">444.***.***-44</td><td class="num">85</td></tr>
+                  <tr><th scope="row">CGG</th><td class="data">555.555.555-66</td><td class="data is-anon">555.***.***-66</td><td class="num">34</td></tr>
+                  <tr><th scope="row">RJ</th><td class="data">666.666.666-66</td><td class="data is-anon">666.***.***-66</td><td class="num">66</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Generalização -->
+          <section class="painel" role="tabpanel" id="painel-general" aria-labelledby="tab-general" tabindex="0">
+            <div class="painel__info">
+              <h3>Generalização</h3>
+              <p>Reduz a precisão de um dado para que ele se misture a um grupo maior. Em vez de “34 anos”, a tabela mostra “30 a 39 anos”. A combinação de faixa etária e local ainda exige avaliação de risco.</p>
+              <dl class="limites">
+                <div><dt>Quando usar</dt><dd>Quando os dados têm características em comum que podem ser agrupadas sem perder a utilidade.</dd></div>
+                <div><dt>Limites</dt><dd>Grupos pequenos ou combinações raras ainda podem identificar pessoas.</dd></div>
+              </dl>
+            </div>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Tabela da generalização, role para os lados no celular">
+              <table class="dados">
+                <thead>
+                  <tr><th scope="col">Nome</th><th scope="col">Cidade de nascimento</th><th scope="col">Estado de nascimento</th><th scope="col" class="num">Idade</th><th scope="col">Faixa etária</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">FM</th><td>Rio Branco</td><td class="is-anon">Acre</td><td class="num">79</td><td class="data is-anon">70 a 79</td></tr>
+                  <tr><th scope="row">AFB</th><td>Macaíba</td><td class="is-anon">Rio Grande do Norte</td><td class="num">63</td><td class="data is-anon">60 a 69</td></tr>
+                  <tr><th scope="row">LB</th><td>Natal</td><td class="is-anon">Rio Grande do Norte</td><td class="num">91</td><td class="data is-anon">90 a 99</td></tr>
+                  <tr><th scope="row">MTL</th><td>Xapuri</td><td class="is-anon">Acre</td><td class="num">85</td><td class="data is-anon">80 a 89</td></tr>
+                  <tr><th scope="row">CGG</th><td>Macaé</td><td class="is-anon">Rio de Janeiro</td><td class="num">34</td><td class="data is-anon">30 a 39</td></tr>
+                  <tr><th scope="row">RJ</th><td>Rio de Janeiro</td><td class="is-anon">Rio de Janeiro</td><td class="num">66</td><td class="data is-anon">60 a 69</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Adição de ruído -->
+          <section class="painel" role="tabpanel" id="painel-ruido" aria-labelledby="tab-ruido" tabindex="0">
+            <div class="painel__info">
+              <h3>Adição de ruído</h3>
+              <p>Soma pequenas variações aos valores originais, como idade, altura ou peso. Neste exemplo, a média de idade é preservada por construção. Isso não elimina, por si só, o risco de identificar alguém.</p>
+              <dl class="medias" aria-live="polite">
+                <div><dt>Média de idade original</dt><dd class="num" id="mediaOriginal">33</dd></div>
+                <div><dt>Média com ruído</dt><dd class="num is-anon" id="mediaRuido">33</dd></div>
+              </dl>
+              <button class="btn btn--quiet" type="button" id="sortearRuido">Sortear outro ruído</button>
+              <p class="ruido__nota" id="ruidoStatus" role="status">Os valores com ruído são sorteados no seu navegador.</p>
+            </div>
+            <div class="table-wrap" tabindex="0" role="region" aria-label="Tabela da adição de ruído, role para os lados no celular">
+              <table class="dados dados--ruido">
+                <thead>
+                  <tr><th scope="col">Nome</th><th scope="col">Versão</th><th scope="col" class="num">Idade</th><th scope="col" class="num">Altura</th><th scope="col" class="num">Peso</th><th scope="col" class="num">Qtd. filhos</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row" rowspan="2">FM</th><td>Original</td><td class="num">30</td><td class="num">1,55</td><td class="num">53</td><td class="num">2</td></tr>
+                  <tr class="linha-ruido" data-base="30|1.55|53|2"><td>Com ruído</td><td class="num is-anon">31</td><td class="num is-anon">1,57</td><td class="num is-anon">51</td><td class="num is-anon">2</td></tr>
+                  <tr><th scope="row" rowspan="2">AFB</th><td>Original</td><td class="num">36</td><td class="num">1,60</td><td class="num">67</td><td class="num">2</td></tr>
+                  <tr class="linha-ruido" data-base="36|1.60|67|2"><td>Com ruído</td><td class="num is-anon">35</td><td class="num is-anon">1,58</td><td class="num is-anon">69</td><td class="num is-anon">3</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. EQUIPE ===== -->
+    <section class="section equipe" id="equipe" aria-labelledby="titulo-equipe" data-step>
+      <div class="container equipe__grid">
+        <h2 id="titulo-equipe" class="equipe__title">Muito obrigado por ver esta apresentação!</h2>
+        <div>
+          <p class="equipe__intro">Pesquisa e apresentação:</p>
+          <ul class="equipe__nomes">
+            <li>Miguel Rocca</li>
+            <li>Christian Paraguassu</li>
+            <li>Carlos Eduardo</li>
+            <li>Emanuela</li>
+            <li>Pedro</li>
+            <li>João</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <p class="footer__mark">Anonimização de Dados</p>
+      <ul class="footer__links">
+        <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">Texto da LGPD</a></li>
+        <li><a href="https://github.com/albertomateus9/anonimizacao-de-dados" target="_blank" rel="noopener noreferrer">Código no GitHub</a></li>
+      </ul>
+      <p class="footer__note">Página inspirada nos projetos <a href="https://albertomateus9.github.io/VozesLivres/" target="_blank" rel="noopener noreferrer">Vozes Livres</a> e <a href="https://yankapa.github.io/projeto_antibullying_v2/" target="_blank" rel="noopener noreferrer">Contra o Bullying</a>. Os dados das tabelas são fictícios. Saiba mais sobre <a href="https://www.gov.br/gestao/pt-br/acesso-a-informacao/privacidade-e-protecao-de-dados/lgpd-no-mgi-1/anonimizacao" target="_blank" rel="noopener noreferrer">boas práticas de anonimização</a>.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

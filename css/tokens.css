@@ -1,0 +1,43 @@
+:root {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+
+  /* Papel frio (azul-gelo do Contra o Bullying), tinta azul-marinho, rosa antigo do Vozes Livres como sinal */
+  --color-paper: oklch(97.6% 0.006 250); --color-paper-2: oklch(94.6% 0.013 250); --color-paper-3: oklch(91% 0.018 250);
+  --color-ink: oklch(25% 0.06 256); --color-ink-2: oklch(35% 0.055 256); --color-muted: oklch(47% 0.035 256);
+  --color-rule: oklch(86% 0.02 250);
+  --color-accent: oklch(47% 0.115 2); --color-accent-ink: oklch(98% 0.006 2); --color-focus: oklch(50% 0.19 2);
+  --color-accent-soft: oklch(94% 0.025 2);
+
+  /* Faixa escura (seção da LGPD e rodapé) */
+  --color-band: oklch(25% 0.06 256); --color-band-ink: oklch(96% 0.01 250); --color-band-muted: oklch(80% 0.03 250);
+  --color-band-rule: oklch(40% 0.05 256); --color-band-accent: oklch(80% 0.08 2);
+
+  /* A tarja: a barra que cobre um dado pessoal */
+  --color-tarja: oklch(25% 0.06 256);
+
+  --font-display: "Newsreader", Georgia, ui-serif, serif;
+  --font-body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "JetBrains Mono", ui-monospace, monospace;
+  --radius-card: 6px; --radius-pill: 999px; --radius-input: 6px; --rule-hair: 1px; --shadow-card: 0 1px 2px oklch(20% 0.03 256 / 0.06);
+  --tracking-display: -0.025em;
+  --nav-h: 72px;
+}
+
+/* Alto contraste (botão na barra de acessibilidade), herdado do Contra o Bullying */
+body.alto-contraste {
+  --color-paper: oklch(100% 0 0); --color-paper-2: oklch(100% 0 0); --color-paper-3: oklch(96% 0 0);
+  --color-ink: oklch(0% 0 0); --color-ink-2: oklch(0% 0 0); --color-muted: oklch(20% 0 0);
+  --color-rule: oklch(0% 0 0);
+  --color-accent: oklch(38% 0.15 2); --color-accent-soft: oklch(100% 0 0); --color-focus: oklch(45% 0.25 2);
+  --color-band: oklch(0% 0 0); --color-band-ink: oklch(100% 0 0); --color-band-muted: oklch(100% 0 0);
+  --color-band-rule: oklch(100% 0 0); --color-band-accent: oklch(88% 0.12 95);
+  --color-tarja: oklch(0% 0 0);
+}
