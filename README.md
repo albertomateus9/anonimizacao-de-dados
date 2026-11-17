@@ -19,7 +19,7 @@ O visitante ganha XP e conquistas ao explorar cada slide:
 - **Caça aos identificadores**, **pergunta rápida da LGPD**, **painel do ECA Digital**, **jogo de ligar vazamentos a golpes** e **desafio de mascaramento**.
 - **Desafio relâmpago**: oito perguntas com tempo, bônus por sequência e placar local por apelido (as teclas 1, 2 e 3 respondem).
 
-Progresso, preferências e placar ficam só no `localStorage` do navegador usado na mostra; nada é enviado para fora. Ao final de cada visita, toque em **Novo visitante** (no slide da equipe ou no painel de conquistas) para zerar o progresso. O som vem desligado; o botão ♪ liga os efeitos.
+Progresso, preferências e placar ficam só no `localStorage` do navegador usado na mostra; nada é enviado para fora. Ao final de cada visita, toque em **Novo visitante** (no último slide ou no painel de conquistas) para zerar o progresso. O som vem desligado; o botão ♪ liga os efeitos.
 
 O layout usa margens fluidas e continua legível de 320 px a 2560 px. Sem JavaScript, as tabelas, listas e textos originais continuam visíveis.
 
