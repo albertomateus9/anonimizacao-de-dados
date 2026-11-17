@@ -394,3 +394,73 @@ body.alto-contraste { --color-gold: oklch(85% 0.16 95); --color-gold-ink: oklch(
   .hud, .slidenav, .toasts, .confetti, .conquistas { display: none !important; }
   .js .slide > .container { opacity: 1; transform: none; }
 }
+
+/* ---------- Celular: tabelas e jogos sem rolagem lateral ---------- */
+@media (max-width: 40rem) {
+  /* Ficha da abertura */
+  .ficha { padding: var(--space-md); }
+  .ficha__table caption { font-size: var(--text-lg); padding-bottom: var(--space-sm); }
+  .ficha__table th, .ficha__table td { padding: var(--space-sm) var(--space-xs) var(--space-sm) 0; }
+  .ficha__table tbody th { font-size: var(--text-xs); line-height: 1.3; }
+  .ficha__table td { font-size: var(--text-sm); }
+  .ficha__table td.data { font-size: 0.74rem; letter-spacing: -0.03em; white-space: nowrap; }
+  .ficha .tarja { width: 4.5em; }
+
+  /* Detetive: a tabela cabe inteira na tela */
+  .det-table-wrap { padding: var(--space-sm) var(--space-sm); overflow-x: visible; }
+  .det-caption { font-size: var(--text-sm); line-height: 1.35; white-space: normal; }
+  .det-table { table-layout: fixed; }
+  .det-table th, .det-table td { padding: var(--space-xs) var(--space-2xs) var(--space-xs) 0; font-size: var(--text-sm); white-space: normal; line-height: 1.25; }
+  .det-table thead th { font-size: var(--text-xs); }
+  .det-table thead th:nth-child(1) { width: 2.6rem; }
+  .det-table thead th:nth-child(3) { width: 4.4rem; }
+  .det-table thead th:nth-child(4) { width: 6.2rem; }
+  .det-table.no-age thead th:nth-child(4) { width: 7.5rem; }
+  .det-pick { min-width: 34px; min-height: 34px; padding: 0; font-size: var(--text-sm); }
+  .det-table.is-game .secret { min-width: 0; width: 100%; font-size: var(--text-xs); }
+  .clue { padding: var(--space-md); }
+  .clue__text { font-size: var(--text-xl); }
+  .det-status p + p { font-size: var(--text-md); }
+
+  /* Laboratório de grupos */
+  .risk-demo .risk-demo__metrics strong { font-size: 2.25rem; }
+  .risk-demo .risk-demo__metrics span { font-size: var(--text-sm); }
+  .seg-radio label { min-height: 40px; padding: 0 var(--space-sm); }
+
+  /* Golpes: as duas colunas lado a lado para ligar sem rolar */
+  .slide .match { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xs); }
+  .match ul { gap: var(--space-xs); }
+  .match button { min-height: 76px; padding: var(--space-xs) var(--space-sm); font-size: var(--text-xs); line-height: 1.3; }
+  .match #matchRight button { font-size: var(--text-sm); line-height: 1.2; }
+  .match button.is-matched { padding-right: 2rem; }
+  .match button.is-matched::after { right: 6px; width: 22px; height: 22px; margin-top: -11px; font-size: var(--text-xs); }
+
+  /* Desafio de mascaramento: CPF numa linha só */
+  .maskgame { padding: var(--space-sm); }
+  .maskgame__cpf { flex-wrap: nowrap; gap: 2px; }
+  .slide .mask-digit { width: auto; flex: 1 1 0; min-width: 0; height: 2.6rem; padding: 0; font-size: var(--text-md); }
+  .mask-sep { padding: 0; font-size: var(--text-md); }
+
+  /* Tabelas das técnicas: menores, ainda roláveis se preciso */
+  .table-wrap { padding: var(--space-xs) var(--space-sm); }
+  .dados { font-size: var(--text-sm); }
+  .dados th, .dados td { padding: var(--space-sm) var(--space-xs) var(--space-sm) 0; }
+  .dados td.data, .dados td.num { font-size: 0.8rem; }
+
+  /* Desafio relâmpago */
+  .quiz { padding: var(--space-lg) var(--space-md); }
+  .quiz__q { font-size: var(--text-xl); }
+  .quiz__opt { min-height: 52px; padding: var(--space-sm); font-size: var(--text-md); }
+  .ranking { padding: var(--space-md); }
+  .ranking__list li { gap: var(--space-xs); grid-template-columns: 2rem minmax(0, 1fr) auto auto; }
+
+  /* Avisos menores e acima da barra de gestos */
+  .toasts { left: var(--space-sm); right: var(--space-sm); bottom: var(--space-md); width: auto; }
+  .toast { padding: var(--space-sm) var(--space-md); }
+  .toast strong { font-size: var(--text-md); }
+  .toast span { display: none; }
+  .toasts .toast:not(:last-child) { display: none; }
+  .conquistas { padding: var(--space-lg) var(--space-md); }
+  .conquistas__grid { grid-template-columns: minmax(0, 1fr); }
+  .final__xp { font-size: var(--text-xl); }
+}
