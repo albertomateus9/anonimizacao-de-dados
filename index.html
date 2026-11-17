@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anonimização de Dados | Mostra Científica da EETEPA Vilhena Alves</title>
-  <meta name="description" content="Experimentos interativos da turma de Ciência de Dados da EETEPA Vilhena Alves sobre anonimização, LGPD e ECA Digital.">
+  <meta name="description" content="Experimentos e desafios interativos da turma de Ciência de Dados da EETEPA Vilhena Alves sobre anonimização, LGPD e ECA Digital.">
   <meta name="theme-color" content="#f4f7fb">
   <meta property="og:title" content="Anonimização de Dados">
-  <meta property="og:description" content="Experimentos interativos sobre dados, anonimização e ECA Digital na Mostra Científica da EETEPA Vilhena Alves.">
+  <meta property="og:description" content="Explore, jogue e descubra por que o contexto importa ao publicar dados. Mostra Científica da EETEPA Vilhena Alves.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Newsreader:opsz,wght@6..72,600&family=Public+Sans:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Newsreader:opsz,wght@6..72,600&family=Public+Sans:wght@400;700&display=swap">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/game.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
@@ -22,7 +23,7 @@
   <!-- Barra de acessibilidade: tamanho do texto e alto contraste (controlada pelo script.js) -->
   <div class="a11y" role="region" aria-label="Opções de acessibilidade">
     <div class="container a11y__row">
-      <p class="a11y__hint">Apresentando? Use as setas <kbd>←</kbd> <kbd>→</kbd> para trocar de seção.</p>
+      <p class="a11y__hint">Apresentando? Tecle <kbd>P</kbd> para tela cheia e use <kbd>←</kbd> <kbd>→</kbd> para trocar de slide.</p>
       <div class="a11y__controls">
         <button type="button" id="fontMinus" aria-label="Diminuir tamanho do texto">A−</button>
         <button type="button" id="fontPlus" aria-label="Aumentar tamanho do texto">A+</button>
@@ -37,16 +38,29 @@
         <span class="wordmark__mark" aria-hidden="true">***</span>
         <span>Anonimização de Dados</span>
       </a>
-      <button class="nav__menu" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <div class="nav__links" id="navLinks">
-        <a href="#experimento">Experimento</a>
-        <a href="#conceito">O que é</a>
+        <a href="#experimento">Grupos</a>
+        <a href="#detetive">Detetive</a>
+        <a href="#conceito">Conceito</a>
         <a href="#lgpd">LGPD</a>
         <a href="#eca">ECA Digital</a>
-        <a href="#riscos">Riscos</a>
+        <a href="#riscos">Golpes</a>
         <a href="#tecnicas">Técnicas</a>
+        <a href="#desafio">Desafio</a>
         <a href="#equipe">Equipe</a>
       </div>
+      <!-- Placar do visitante: preenchido pelo game.js -->
+      <div class="hud" id="hud" hidden>
+        <button type="button" class="hud__score" id="hudOpen" aria-haspopup="dialog" aria-controls="conquistas">
+          <span class="hud__level" id="hudLevel">Nível 1</span>
+          <span class="hud__xp"><strong id="hudXp">0</strong> XP</span>
+          <span class="hud__meter" aria-hidden="true"><span id="hudMeter"></span></span>
+          <span class="hud__badges" id="hudBadges">0/14</span>
+        </button>
+        <button type="button" class="hud__icon" id="soundBtn" aria-pressed="false" aria-label="Efeitos sonoros">♪</button>
+        <button type="button" class="hud__icon hud__present" id="presentBtn" aria-pressed="false" title="Modo apresentação (P)">Apresentar</button>
+      </div>
+      <button class="nav__menu" id="menuButton" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
     </nav>
     <span class="read-progress" id="readProgress" aria-hidden="true"></span>
   </header>
@@ -54,21 +68,26 @@
   <main id="conteudo">
 
     <!-- ===== 1. INÍCIO ===== -->
-    <section class="hero" id="inicio" aria-labelledby="titulo-hero" data-step>
+    <section class="hero slide" id="inicio" aria-labelledby="titulo-hero" data-step data-title="Início">
       <div class="container hero__grid">
         <div class="hero__copy">
           <p class="eyebrow">Mostra Científica · EETEPA Vilhena Alves</p>
           <h1 id="titulo-hero">Anonimização de Dados</h1>
           <p class="lead">Se uma tabela não tem nomes, ela está segura? Explore os dados, tome decisões de publicação e descubra por que o contexto importa.</p>
           <div class="actions">
-            <a class="btn" href="#experimento">Explorar os dados</a>
-            <a class="text-link" href="#tecnicas">Ver as três técnicas</a>
+            <a class="btn btn--big" href="#experimento" id="startMission">Aceitar a missão</a>
+            <a class="text-link" href="#desafio">Ir direto ao desafio final</a>
           </div>
+          <ol class="howto" aria-label="Como funciona">
+            <li><strong>Explore</strong><span>Mexa nos dados de cada slide.</span></li>
+            <li><strong>Desvende</strong><span>Resolva os jogos e ganhe XP.</span></li>
+            <li><strong>Prove</strong><span>Encare o desafio relâmpago e entre no placar.</span></li>
+          </ol>
           <p class="byline">Trabalho desenvolvido pela turma de Ciência de Dados. Apresentação de Miguel Rocca, Christian Paraguassu, Carlos Eduardo, Emanuela, Pedro e João.</p>
         </div>
 
         <!-- A ficha mostra um registro fictício antes e depois de reduzir detalhes. -->
-        <figure class="ficha" aria-labelledby="ficha-legenda">
+        <figure class="ficha" aria-labelledby="ficha-legenda" id="ficha">
           <table class="ficha__table">
             <caption id="ficha-legenda">Um cadastro antes e depois da transformação</caption>
             <thead>
@@ -97,33 +116,49 @@
               </tr>
             </tbody>
           </table>
-          <figcaption class="ficha__note">Dados de exemplo usados na apresentação.</figcaption>
+          <figcaption class="ficha__note">Dados de exemplo usados na apresentação. <button type="button" class="ficha__toggle" id="fichaToggle" hidden>Ver só o “depois”</button></figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- ===== 2. EXPERIMENTO COM DADOS FICTÍCIOS ===== -->
-    <section class="section experimento" id="experimento" aria-labelledby="titulo-experimento" data-step>
-      <div class="container">
-        <div class="story-heading">
-          <p class="eyebrow">01 / O problema</p>
-          <h2 id="titulo-experimento">Seis registros. Seis combinações únicas.</h2>
-          <p class="lead">Nesta amostra fictícia, trocar a cidade pelo estado e a idade por uma faixa de dez anos ainda deixa cada linha sozinha em seu grupo.</p>
+    <!-- ===== 2. LABORATÓRIO DE GRUPOS (k-anonimato) ===== -->
+    <section class="section experimento slide" id="experimento" aria-labelledby="titulo-experimento" data-step data-title="Grupos">
+      <div class="container lab-grid">
+        <div class="lab-grid__main">
+          <div class="story-heading">
+            <p class="eyebrow">01 / O problema</p>
+            <h2 id="titulo-experimento">Seis registros. Seis combinações únicas.</h2>
+            <p class="lead">Nesta amostra fictícia, trocar a cidade pelo estado e a idade por uma faixa de dez anos ainda deixa cada linha sozinha em seu grupo.</p>
+          </div>
+
+          <div class="risk-demo" id="riskDemo">
+            <div class="kcontrols" id="kControls">
+              <fieldset class="seg-radio">
+                <legend>Local publicado</legend>
+                <label><input type="radio" name="k-loc" value="city"> Cidade</label>
+                <label><input type="radio" name="k-loc" value="state" checked> Estado</label>
+                <label><input type="radio" name="k-loc" value="region"> Região</label>
+                <label><input type="radio" name="k-loc" value="none"> Ocultar</label>
+              </fieldset>
+              <fieldset class="seg-radio">
+                <legend>Idade publicada</legend>
+                <label><input type="radio" name="k-age" value="exact"> Exata</label>
+                <label><input type="radio" name="k-age" value="5"> 5 anos</label>
+                <label><input type="radio" name="k-age" value="10" checked> 10 anos</label>
+                <label><input type="radio" name="k-age" value="20"> 20 anos</label>
+                <label><input type="radio" name="k-age" value="none"> Ocultar</label>
+              </fieldset>
+            </div>
+            <div class="risk-demo__metrics" aria-live="polite">
+              <p><strong id="riskRecords">6</strong><span>registros fictícios</span></p>
+              <p><strong id="riskUnique">6</strong><span>registros sozinhos em seu grupo</span></p>
+              <p class="metric-k"><strong id="riskK">1</strong><span>tamanho do menor grupo (k)</span></p>
+              <p class="metric-util"><strong id="riskUtil">57%</strong><span>detalhe preservado</span><span class="util-meter" aria-hidden="true"><span id="utilMeter"></span></span></p>
+            </div>
+          </div>
         </div>
 
-        <div class="risk-demo" id="riskDemo">
-          <div class="risk-demo__metrics" aria-live="polite">
-            <p><strong id="riskRecords">6</strong><span>registros fictícios</span></p>
-            <p><strong id="riskUnique">6</strong><span>combinações com apenas um registro</span></p>
-          </div>
-          <div class="risk-control">
-            <label for="precision">Informações consideradas</label>
-            <select id="precision">
-              <option value="city_age">Cidade e idade exata</option>
-              <option value="state_decade" selected>Estado e faixa de 10 anos</option>
-              <option value="state_only">Somente estado</option>
-            </select>
-          </div>
+        <div class="lab-grid__side">
           <div class="risk-demo__chart" role="group" aria-label="Tamanho dos grupos formados pelos dados exibidos">
             <p class="chart-title">Quantos registros há em cada combinação?</p>
             <ol class="risk-bars" id="riskBars">
@@ -136,20 +171,86 @@
             </ol>
           </div>
           <p class="risk-demo__explain" id="riskExplain">Todas as seis combinações são únicas nesta pequena amostra. Isso não identifica ninguém automaticamente, mas pode facilitar a ligação com outras fontes.</p>
+          <div class="mission" id="kMission" hidden>
+            <p class="mission__tag">Missão</p>
+            <p class="mission__goal">Deixe cada registro num grupo de pelo menos 2 pessoas (k ≥ 2) preservando o máximo de detalhe.</p>
+            <p class="mission__status" id="kMissionStatus" aria-live="polite">Ainda há registros sozinhos.</p>
+          </div>
         </div>
-        <p class="story-next">O desafio é reduzir essa possibilidade sem perder toda a informação útil. <a href="#conceito">Veja o que significa anonimizar</a>.</p>
       </div>
     </section>
 
-    <!-- ===== 3. O QUE É ===== -->
-    <section class="section conceito" id="conceito" aria-labelledby="titulo-conceito" data-step>
+    <!-- ===== 3. DETETIVE: ataque de ligação ===== -->
+    <section class="section detetive slide" id="detetive" aria-labelledby="titulo-detetive" data-step data-title="Detetive">
+      <div class="container det-grid">
+        <div class="det-grid__brief">
+          <p class="eyebrow">02 / O ataque de ligação</p>
+          <h2 id="titulo-detetive">Agora você é o detetive.</h2>
+          <p class="lead">Uma tabela sem nomes foi publicada. Um jornal da cidade deu outra pista. Junte as duas informações e encontre a consulta da pessoa.</p>
+          <blockquote class="clue">
+            <p class="clue__source">Jornal fictício · Coluna social</p>
+            <p class="clue__text">“Moradora de <mark>Xapuri, no Acre</mark>, comemora <mark>85 anos</mark> com festa na praça.”</p>
+          </blockquote>
+          <div class="det-status" id="detStatus" aria-live="polite">
+            <p class="det-round" id="detRound">Rodada 1 de 2 · Tabela publicada com estado e faixa de 10 anos</p>
+            <p id="detFeedback">Toque na linha que você acha que é dela.</p>
+          </div>
+          <button type="button" class="btn btn--quiet" id="detNext" hidden>Próxima rodada</button>
+        </div>
+        <div class="det-grid__table">
+          <div class="table-wrap det-table-wrap">
+            <table class="dados det-table" id="detTable">
+              <caption class="det-caption" id="detCaption">Tabela publicada: consultas marcadas (dados fictícios)</caption>
+              <thead>
+                <tr><th scope="col">Linha</th><th scope="col">Estado</th><th scope="col" class="det-age-col">Faixa etária</th><th scope="col">Consulta marcada</th></tr>
+              </thead>
+              <tbody>
+                <tr data-match="0"><th scope="row">1</th><td>Acre</td><td class="det-age">70 a 79</td><td><span class="secret">Cardiologia</span></td></tr>
+                <tr data-match="0"><th scope="row">2</th><td>Rio Grande do Norte</td><td class="det-age">60 a 69</td><td><span class="secret">Ortopedia</span></td></tr>
+                <tr data-match="0"><th scope="row">3</th><td>Rio Grande do Norte</td><td class="det-age">90 a 99</td><td><span class="secret">Oftalmologia</span></td></tr>
+                <tr data-match="1"><th scope="row">4</th><td>Acre</td><td class="det-age">80 a 89</td><td><span class="secret">Dermatologia</span></td></tr>
+                <tr data-match="0"><th scope="row">5</th><td>Rio de Janeiro</td><td class="det-age">30 a 39</td><td><span class="secret">Nutrição</span></td></tr>
+                <tr data-match="0"><th scope="row">6</th><td>Rio de Janeiro</td><td class="det-age">60 a 69</td><td><span class="secret">Fisioterapia</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="det-note">Mesmo sem nomes, só uma linha combina com “Acre” e “85 anos”. Na rodada 2, a faixa etária sai da tabela.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4. O QUE É ===== -->
+    <section class="section conceito slide" id="conceito" aria-labelledby="titulo-conceito" data-step data-title="Conceito">
       <div class="container conceito__grid">
         <div class="conceito__text">
+          <p class="eyebrow">03 / O conceito</p>
           <h2 id="titulo-conceito">O que é anonimizar um dado</h2>
           <p class="lead">É transformar os dados para que uma pessoa não possa ser identificada por meios razoavelmente disponíveis, inclusive ao combinar informações de outras fontes.</p>
           <p>Para ser considerado anonimizado, o dado deve perder a possibilidade de associação direta ou indireta a alguém, considerando os meios técnicos razoáveis disponíveis no momento do tratamento.</p>
         </div>
-        <div class="conceito__lists">
+
+        <!-- Jogo: caça aos identificadores. Sem JavaScript, as listas abaixo continuam visíveis. -->
+        <div class="hunt" id="hunt" hidden>
+          <h3>Caça aos identificadores</h3>
+          <p class="hunt__intro">Toque nos campos que <strong>identificam diretamente</strong> uma pessoa. Eles recebem a tarja e saem do banco.</p>
+          <ul class="hunt__chips" id="huntChips">
+            <li><button type="button" data-id="1" aria-pressed="false"><span>Nome completo</span></button></li>
+            <li><button type="button" data-id="0" aria-pressed="false"><span>Faixa etária</span></button></li>
+            <li><button type="button" data-id="1" aria-pressed="false"><span>CPF</span></button></li>
+            <li><button type="button" data-id="0" aria-pressed="false"><span>Estado</span></button></li>
+            <li><button type="button" data-id="1" aria-pressed="false"><span>Telefone</span></button></li>
+            <li><button type="button" data-id="0" aria-pressed="false"><span>Oficina escolhida</span></button></li>
+            <li><button type="button" data-id="1" aria-pressed="false"><span>E-mail</span></button></li>
+            <li><button type="button" data-id="0" aria-pressed="false"><span>Turno</span></button></li>
+            <li><button type="button" data-id="1" aria-pressed="false"><span>Endereço</span></button></li>
+          </ul>
+          <div class="hunt__actions">
+            <button type="button" class="btn" id="huntCheck">Conferir</button>
+            <p class="hunt__feedback" id="huntFeedback" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="conceito__lists" id="conceitoLists">
           <div class="conceito__col">
             <h3>Sai do banco</h3>
             <ul class="saem">
@@ -173,82 +274,126 @@
       </div>
     </section>
 
-    <!-- ===== 3. LGPD ===== -->
-    <section class="band" id="lgpd" aria-labelledby="titulo-lgpd" data-step>
-      <div class="container">
-        <h2 id="titulo-lgpd">A lei que protege seus dados</h2>
-        <p class="statement">A LGPD estabelece regras para tratar dados pessoais. Retirar nomes de uma tabela não encerra a análise de risco.</p>
-        <div class="lgpd__tools">
-          <article class="tool">
-            <h3>RIPD</h3>
-            <p class="tool__name">Relatório de Impacto à Proteção de Dados</p>
-            <p>Relatório que descreve o tratamento de dados pessoais, seus riscos e as medidas para reduzi-los. A ANPD recomenda sua elaboração em situações de alto risco e pode exigi-lo do controlador em casos previstos na LGPD.</p>
-          </article>
-          <article class="tool">
-            <h3>Risco de reidentificação</h3>
-            <p class="tool__name">Avaliação essencial da anonimização</p>
-            <p>Avalia se um dado que parece anônimo ainda pode ser ligado de volta a uma pessoa. Se puder, a privacidade não está realmente segura.</p>
-          </article>
+    <!-- ===== 5. LGPD ===== -->
+    <section class="band slide" id="lgpd" aria-labelledby="titulo-lgpd" data-step data-title="LGPD">
+      <div class="container lgpd-grid">
+        <div>
+          <h2 id="titulo-lgpd">A lei que protege seus dados</h2>
+          <p class="statement">A LGPD estabelece regras para tratar dados pessoais. Retirar nomes de uma tabela não encerra a análise de risco.</p>
+          <div class="quick" data-quick="lgpd" hidden>
+            <p class="quick__q">Pergunta rápida: retirar os nomes de uma tabela basta para anonimizá-la?</p>
+            <div class="quick__opts">
+              <button type="button" data-correct="0">Sim, sem nome ninguém é identificado</button>
+              <button type="button" data-correct="1">Não, é preciso avaliar o risco de reidentificação</button>
+            </div>
+            <p class="quick__fb" aria-live="polite"></p>
+          </div>
         </div>
-        <p class="band__source">Fontes: <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">LGPD, Lei nº 13.709/2018</a> e <a href="https://www.gov.br/anpd/pt-br/canais_atendimento/agente-de-tratamento/relatorio-de-impacto-a-protecao-de-dados-pessoais-ripd" target="_blank" rel="noopener noreferrer">orientações da ANPD sobre o RIPD</a>.</p>
+        <div>
+          <div class="lgpd__tools">
+            <article class="tool">
+              <h3>RIPD</h3>
+              <p class="tool__name">Relatório de Impacto à Proteção de Dados</p>
+              <p>Relatório que descreve o tratamento de dados pessoais, seus riscos e as medidas para reduzi-los. A ANPD recomenda sua elaboração em situações de alto risco e pode exigi-lo do controlador em casos previstos na LGPD.</p>
+            </article>
+            <article class="tool">
+              <h3>Risco de reidentificação</h3>
+              <p class="tool__name">Avaliação essencial da anonimização</p>
+              <p>Avalia se um dado que parece anônimo ainda pode ser ligado de volta a uma pessoa. Se puder, a privacidade não está realmente segura.</p>
+            </article>
+          </div>
+          <p class="band__source">Fontes: <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">LGPD, Lei nº 13.709/2018</a> e <a href="https://www.gov.br/anpd/pt-br/canais_atendimento/agente-de-tratamento/relatorio-de-impacto-a-protecao-de-dados-pessoais-ripd" target="_blank" rel="noopener noreferrer">orientações da ANPD sobre o RIPD</a>.</p>
+        </div>
       </div>
     </section>
 
     <!-- Cenário didático: registros gerados para esta demonstração, sem dados de alunos reais. -->
-    <section class="section eca" id="eca" aria-labelledby="titulo-eca" data-step>
-      <div class="container">
-        <div class="story-heading">
-          <p class="eyebrow">02 / A decisão de publicar</p>
-          <h2 id="titulo-eca">E se os dados fossem de adolescentes?</h2>
-          <p class="lead">Imagine um painel de participação em oficinas. Criamos 12 registros sintéticos: duas faixas etárias, dois setores fictícios e três oficinas. Nenhum registro pertence a estudante da EETEPA.</p>
+    <section class="section eca slide" id="eca" aria-labelledby="titulo-eca" data-step data-title="ECA Digital">
+      <div class="container eca-grid">
+        <div class="eca-grid__main">
+          <div class="story-heading">
+            <p class="eyebrow">04 / A decisão de publicar</p>
+            <h2 id="titulo-eca">E se os dados fossem de adolescentes?</h2>
+            <p class="lead">Imagine um painel de participação em oficinas. Criamos 12 registros sintéticos: duas faixas etárias, dois setores fictícios e três oficinas. Nenhum registro pertence a estudante da EETEPA.</p>
+          </div>
+
+          <div class="eca-lab" id="ecaLab">
+            <div class="eca-lab__intro">
+              <h3>Monte uma versão pública do painel</h3>
+              <p>Quanto mais detalhes combinados, menores ficam os grupos. Escolha o que mostrar e observe o resultado nesta amostra inventada.</p>
+            </div>
+            <div class="eca-presets" id="ecaPresets" aria-label="Etapas sugeridas do experimento">
+              <button type="button" data-preset="all">1 · Todos os detalhes</button>
+              <button type="button" data-preset="age_activity">2 · Sem setor</button>
+              <button type="button" data-preset="activity">3 · Só oficina</button>
+            </div>
+            <fieldset class="eca-fields">
+              <legend>Informações no painel</legend>
+              <label><input type="checkbox" name="eca-field" value="age" checked> Faixa etária</label>
+              <label><input type="checkbox" name="eca-field" value="sector" checked> Setor fictício</label>
+              <label><input type="checkbox" name="eca-field" value="activity" checked> Oficina</label>
+            </fieldset>
+            <label class="eca-suppress"><input type="checkbox" id="ecaSuppress"> Ocultar grupos com menos de 3 registros <span>(limiar didático, não uma exigência legal)</span></label>
+
+            <div class="eca-metrics" aria-live="polite">
+              <p><strong id="ecaGroups">12</strong><span>combinações formadas</span></p>
+              <p><strong id="ecaSmall">12</strong><span>registros em grupos menores que 3</span></p>
+              <p><strong id="ecaVisible">12</strong><span>registros em grupos exibidos</span></p>
+            </div>
+          </div>
         </div>
 
-        <div class="eca-lab" id="ecaLab">
-          <div class="eca-lab__intro">
-            <h3>Monte uma versão pública do painel</h3>
-            <p>Quanto mais detalhes combinados, menores ficam os grupos. Escolha o que mostrar e observe o resultado nesta amostra inventada.</p>
-          </div>
-          <div class="eca-presets" id="ecaPresets" aria-label="Etapas sugeridas do experimento">
-            <button type="button" data-preset="all">1 · Todos os detalhes</button>
-            <button type="button" data-preset="age_activity">2 · Sem setor</button>
-            <button type="button" data-preset="activity">3 · Só oficina</button>
-          </div>
-          <fieldset class="eca-fields">
-            <legend>Informações no painel</legend>
-            <label><input type="checkbox" name="eca-field" value="age" checked> Faixa etária</label>
-            <label><input type="checkbox" name="eca-field" value="sector" checked> Setor fictício</label>
-            <label><input type="checkbox" name="eca-field" value="activity" checked> Oficina</label>
-          </fieldset>
-          <label class="eca-suppress"><input type="checkbox" id="ecaSuppress"> Ocultar grupos com menos de 3 registros <span>(limiar didático, não uma exigência legal)</span></label>
-
-          <div class="eca-metrics" aria-live="polite">
-            <p><strong id="ecaGroups">12</strong><span>combinações formadas</span></p>
-            <p><strong id="ecaSmall">12</strong><span>registros em grupos menores que 3</span></p>
-            <p><strong id="ecaVisible">12</strong><span>registros em grupos exibidos</span></p>
-          </div>
+        <div class="eca-grid__side">
           <div class="eca-chart" role="group" aria-label="Tamanho dos grupos no painel sintético">
             <p class="chart-title">Tamanho de cada grupo</p>
             <ol class="eca-bars" id="ecaBars"><li class="eca-bars__fallback">Faixa + setor + oficina: 12 grupos de 1 registro cada.</li></ol>
           </div>
           <p class="eca-summary" id="ecaSummary" aria-live="polite">Cada combinação descreve apenas um registro sintético. Nesta amostra, publicar todos os detalhes deixaria as 12 linhas singulares.</p>
-        </div>
-
-        <div class="eca-context">
-          <h3>O que o ECA Digital acrescenta</h3>
-          <p>O ECA Digital (Lei nº 15.211/2025), em vigor desde março de 2026, exige proteção prioritária e medidas proporcionais de privacidade, proteção de dados e segurança em produtos e serviços digitais direcionados a crianças e adolescentes ou provavelmente acessados por eles. Este experimento ensina a pensar no risco; ele não avalia a conformidade jurídica de uma plataforma.</p>
-          <p class="eca-context__source">Fontes: <a href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener noreferrer">ANPD: ECA Digital</a> e <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm" target="_blank" rel="noopener noreferrer">Lei nº 15.211/2025</a>.</p>
+          <div class="eca-context">
+            <h3>O que o ECA Digital acrescenta</h3>
+            <p>O ECA Digital (Lei nº 15.211/2025), em vigor desde março de 2026, exige proteção prioritária e medidas proporcionais de privacidade, proteção de dados e segurança em produtos e serviços digitais direcionados a crianças e adolescentes ou provavelmente acessados por eles. Este experimento ensina a pensar no risco; ele não avalia a conformidade jurídica de uma plataforma.</p>
+            <p class="eca-context__source">Fontes: <a href="https://www.gov.br/anpd/pt-br/assuntos/eca-digital" target="_blank" rel="noopener noreferrer">ANPD: ECA Digital</a> e <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/l15211.htm" target="_blank" rel="noopener noreferrer">Lei nº 15.211/2025</a>.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== 5. RISCOS ===== -->
-    <section class="section riscos" id="riscos" aria-labelledby="titulo-riscos" data-step>
+    <!-- ===== 7. RISCOS ===== -->
+    <section class="section riscos slide" id="riscos" aria-labelledby="titulo-riscos" data-step data-title="Golpes">
       <div class="container riscos__grid">
         <div class="riscos__head">
+          <p class="eyebrow">05 / O prejuízo</p>
           <h2 id="titulo-riscos">Quando um dado vaza</h2>
-          <p class="lead">Nome, CPF, telefone, endereço ou dados bancários nas mãos erradas podem virar:</p>
+          <p class="lead">Nome, CPF, telefone, endereço ou dados bancários nas mãos erradas podem virar golpe.</p>
+          <p class="match__how" id="matchHow" hidden>Ligue cada dado vazado ao golpe que ele facilita: toque em um item da esquerda e depois em um da direita.</p>
+          <p class="match__score" id="matchScore" aria-live="polite" hidden>0 de 5 ligações</p>
         </div>
-        <ul class="riscos__list">
+
+        <!-- Jogo de ligar. Sem JavaScript, a lista original continua visível. -->
+        <div class="match" id="matchGame" hidden>
+          <div class="match__col">
+            <p class="match__label">O que vazou</p>
+            <ul id="matchLeft">
+              <li><button type="button" data-pair="cartao">Número, validade e código do cartão</button></li>
+              <li><button type="button" data-pair="senha">Usuário e senha de uma rede social</button></li>
+              <li><button type="button" data-pair="cpf">Nome, CPF e data de nascimento</button></li>
+              <li><button type="button" data-pair="banco">Telefone e banco onde a pessoa tem conta</button></li>
+              <li><button type="button" data-pair="doc">Foto do documento e uma selfie</button></li>
+            </ul>
+          </div>
+          <div class="match__col">
+            <p class="match__label">Pode virar</p>
+            <ul id="matchRight">
+              <li><button type="button" data-pair="banco">Golpe da falsa central do banco</button></li>
+              <li><button type="button" data-pair="cartao">Clonagem de cartões</button></li>
+              <li><button type="button" data-pair="doc">Roubo de identidade</button></li>
+              <li><button type="button" data-pair="cpf">Falsos empréstimos em nome da vítima</button></li>
+              <li><button type="button" data-pair="senha">Invasão de contas e redes sociais</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="riscos__list" id="riscosList">
           <li>Golpes financeiros e bancários</li>
           <li>Clonagem de cartões</li>
           <li>Falsos empréstimos em nome da vítima</li>
@@ -258,20 +403,26 @@
       </div>
     </section>
 
-    <!-- ===== 6. TÉCNICAS: a tabela que troca de técnica ===== -->
-    <section class="section tecnicas" id="tecnicas" aria-labelledby="titulo-tecnicas" data-step>
+    <!-- ===== 8. TÉCNICAS: a tabela que troca de técnica ===== -->
+    <section class="section tecnicas slide" id="tecnicas" aria-labelledby="titulo-tecnicas" data-step data-title="Técnicas">
       <div class="container">
         <div class="tecnicas__head">
-          <h2 id="titulo-tecnicas">Três técnicas na mesma tabela</h2>
-          <p class="lead">Escolha uma técnica e veja o que muda nos dados.</p>
+          <div>
+            <p class="eyebrow">06 / As ferramentas</p>
+            <h2 id="titulo-tecnicas">Três técnicas na mesma tabela</h2>
+          </div>
+          <div>
+            <p class="lead">Escolha uma técnica e veja o que muda nos dados.</p>
+            <p class="tecnicas__aviso">As tabelas usam dados fictícios e mostram transformações didáticas. Uma técnica isolada não garante anonimização: é preciso avaliar a possibilidade de reidentificação, inclusive pela combinação com outros dados.</p>
+          </div>
         </div>
-        <p class="tecnicas__aviso">As tabelas usam dados fictícios e mostram transformações didáticas. Uma técnica isolada não garante anonimização: é preciso avaliar a possibilidade de reidentificação, inclusive pela combinação com outros dados.</p>
 
         <div class="switch" data-switch>
           <div class="seg" role="tablist" aria-label="Técnicas de anonimização">
             <button type="button" role="tab" id="tab-mascara" aria-controls="painel-mascara" aria-selected="true">Mascaramento</button>
             <button type="button" role="tab" id="tab-general" aria-controls="painel-general" aria-selected="false" tabindex="-1">Generalização</button>
             <button type="button" role="tab" id="tab-ruido" aria-controls="painel-ruido" aria-selected="false" tabindex="-1">Adição de ruído</button>
+            <span class="seg__progress" id="tabProgress" hidden>Técnicas vistas: 1 de 3</span>
           </div>
 
           <!-- Mascaramento -->
@@ -283,6 +434,11 @@
                 <div><dt>Antes</dt><dd class="data">123.456.789-10</dd></div>
                 <div><dt>Depois</dt><dd class="data is-anon">***.456.789-**</dd></div>
               </dl>
+              <div class="maskgame" id="maskGame" hidden>
+                <p class="maskgame__goal"><strong>Desafio:</strong> toque nos dígitos para escondê-los até chegar ao padrão do “Depois”.</p>
+                <div class="maskgame__cpf" id="maskCpf" aria-label="CPF fictício para mascarar"></div>
+                <p class="maskgame__fb" id="maskFb" aria-live="polite">11 dígitos visíveis.</p>
+              </div>
             </div>
             <div class="table-wrap" tabindex="0" role="region" aria-label="Tabela do mascaramento, role para os lados no celular">
               <table class="dados">
@@ -308,7 +464,7 @@
               <p>Reduz a precisão de um dado para que ele se misture a um grupo maior. Em vez de “34 anos”, a tabela mostra “30 a 39 anos”. A combinação de faixa etária e local ainda exige avaliação de risco.</p>
               <dl class="limites">
                 <div><dt>Quando usar</dt><dd>Quando os dados têm características em comum que podem ser agrupadas sem perder a utilidade.</dd></div>
-                <div><dt>Limites</dt><dd>Grupos pequenos ou combinações raras ainda podem identificar pessoas.</dd></div>
+                <div><dt>Limites</dt><dd>Grupos pequenos ou combinações raras ainda podem identificar pessoas. Você testou isso no laboratório de grupos.</dd></div>
               </dl>
             </div>
             <div class="table-wrap" tabindex="0" role="region" aria-label="Tabela da generalização, role para os lados no celular">
@@ -358,10 +514,73 @@
       </div>
     </section>
 
-    <!-- ===== 7. EQUIPE ===== -->
-    <section class="section equipe" id="equipe" aria-labelledby="titulo-equipe" data-step>
+    <!-- ===== 9. DESAFIO RELÂMPAGO ===== -->
+    <section class="section desafio slide" id="desafio" aria-labelledby="titulo-desafio" data-step data-title="Desafio">
+      <div class="container quiz-grid">
+        <div class="quiz-grid__intro">
+          <p class="eyebrow">07 / Desafio relâmpago</p>
+          <h2 id="titulo-desafio">Você protegeria esses dados?</h2>
+          <p class="lead">Oito perguntas, 20 segundos cada. Responda rápido para ganhar bônus e acerte em sequência para multiplicar os pontos.</p>
+          <div class="ranking" id="ranking" hidden>
+            <div class="ranking__head">
+              <h3>Placar da mostra</h3>
+              <label class="ranking__mask"><input type="checkbox" id="rankMask"> Mascarar apelidos</label>
+            </div>
+            <ol class="ranking__list" id="rankList"></ol>
+            <p class="ranking__note">O placar fica salvo só neste computador. Use um apelido, não seu nome completo.</p>
+          </div>
+        </div>
+
+        <div class="quiz" id="quiz">
+          <noscript><p>O desafio precisa de JavaScript. As respostas estão nas seções anteriores.</p></noscript>
+          <div class="quiz__start" id="quizStart" hidden>
+            <p class="quiz__big">8 perguntas</p>
+            <p>Tudo o que cai no desafio apareceu nos slides anteriores.</p>
+            <button type="button" class="btn btn--big" id="quizBegin">Começar o desafio</button>
+          </div>
+          <div class="quiz__play" id="quizPlay" hidden>
+            <div class="quiz__top">
+              <p class="quiz__count" id="quizCount">Pergunta 1 de 8</p>
+              <p class="quiz__streak" id="quizStreak" aria-live="polite"></p>
+              <p class="quiz__points"><strong id="quizPoints">0</strong> pontos</p>
+            </div>
+            <div class="quiz__timer" aria-hidden="true"><span id="quizTimer"></span></div>
+            <p class="quiz__q" id="quizQuestion"></p>
+            <div class="quiz__opts" id="quizOpts"></div>
+            <p class="quiz__fb" id="quizFb" aria-live="polite"></p>
+            <button type="button" class="btn" id="quizNext" hidden>Próxima</button>
+          </div>
+          <div class="quiz__end" id="quizEnd" hidden>
+            <p class="quiz__big" id="quizFinal">0 pontos</p>
+            <p id="quizSummary"></p>
+            <form class="quiz__save" id="quizSave">
+              <label for="quizNick">Seu apelido para o placar</label>
+              <div class="quiz__saverow">
+                <input id="quizNick" name="apelido" maxlength="16" autocomplete="off" placeholder="Ex.: Detetive_09" required>
+                <button type="submit" class="btn">Salvar</button>
+              </div>
+            </form>
+            <button type="button" class="btn btn--quiet" id="quizAgain">Jogar de novo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10. EQUIPE ===== -->
+    <section class="section equipe slide" id="equipe" aria-labelledby="titulo-equipe" data-step data-title="Equipe">
       <div class="container equipe__grid">
-        <h2 id="titulo-equipe" class="equipe__title">Ciência de Dados para perguntar antes de publicar.</h2>
+        <div>
+          <h2 id="titulo-equipe" class="equipe__title">Ciência de Dados para perguntar antes de publicar.</h2>
+          <div class="final" id="finalCard" hidden>
+            <p class="final__label">Seu resultado</p>
+            <p class="final__xp"><strong id="finalXp">0</strong> XP · <span id="finalLevel">Aprendiz</span></p>
+            <p class="final__badges" id="finalBadges">0 de 14 conquistas</p>
+            <div class="final__actions">
+              <button type="button" class="btn btn--quiet" id="finalOpen">Ver conquistas</button>
+              <button type="button" class="btn" id="finalReset">Novo visitante</button>
+            </div>
+          </div>
+        </div>
         <div>
           <p class="equipe__intro">Mostra Científica da EETEPA Vilhena Alves · trabalho da turma de Ciência de Dados · pesquisa e apresentação:</p>
           <ul class="equipe__nomes">
@@ -389,6 +608,34 @@
     </div>
   </footer>
 
+  <!-- Navegação de slides (aparece em telas largas) -->
+  <nav class="slidenav" id="slideNav" aria-label="Slides" hidden>
+    <button type="button" id="slidePrev" aria-label="Slide anterior">←</button>
+    <p class="slidenav__label"><span id="slideNum">1</span> / <span id="slideTotal">10</span> <span class="slidenav__title" id="slideTitle">Início</span></p>
+    <button type="button" id="slideNext" aria-label="Próximo slide">→</button>
+  </nav>
+
+  <!-- Conquistas -->
+  <dialog class="conquistas" id="conquistas" aria-labelledby="conquistasTitulo">
+    <div class="conquistas__head">
+      <div>
+        <p class="eyebrow">Seu progresso</p>
+        <h2 id="conquistasTitulo">Conquistas</h2>
+      </div>
+      <button type="button" class="conquistas__close" id="conquistasClose" aria-label="Fechar">✕</button>
+    </div>
+    <p class="conquistas__level" id="dlgLevel"></p>
+    <ul class="conquistas__grid" id="conquistasGrid"></ul>
+    <div class="conquistas__foot">
+      <p>O progresso fica salvo neste navegador. Ao final de cada visita, toque em “Novo visitante”.</p>
+      <button type="button" class="btn btn--quiet" id="dlgReset">Novo visitante</button>
+    </div>
+  </dialog>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+  <script src="js/game.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>

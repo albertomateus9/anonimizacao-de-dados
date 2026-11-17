@@ -4,9 +4,24 @@ Apresentação educativa da turma de Ciência de Dados para a Mostra Científica
 
 ## Como abrir
 
-Abra `index.html` no navegador. A apresentação funciona sem instalação ou build. O JavaScript calcula, a partir dos seis registros fictícios da tabela, quantas combinações ficam únicas conforme o detalhe publicado muda. Um segundo experimento usa 12 registros sintéticos para comparar versões de um painel hipotético de oficinas para adolescentes; o visitante escolhe atributos e testa a ocultação de grupos pequenos. Há ainda abas das técnicas, sorteio de valores fictícios, opções de leitura, indicador de progresso, menu para telas pequenas e navegação entre seções com as setas esquerda e direita.
+Abra `index.html` no navegador. A apresentação funciona sem instalação ou build.
 
-O layout usa margens fluidas e área de conteúdo de até 1440 px. Os textos mantêm uma largura confortável de leitura; cartões, tabelas e listas se ajustam à largura disponível e alguns grupos passam a duas colunas em telas largas. A visualização foi conferida de 320 px a 2560 px.
+## Apresentar na mostra (monitor 1920x1080)
+
+Em telas a partir de 1600 px de largura, cada seção vira um slide do tamanho da tela. Tecle `P` (ou o botão **Apresentar**) para entrar em tela cheia; use `←` `→` ou `PageUp` `PageDown` para trocar de slide. No modo apresentação, `↑` e `↓` também trocam de slide. O contador no canto inferior direito mostra o slide atual.
+
+## Gamificação
+
+O visitante ganha XP e conquistas ao explorar cada slide:
+
+- **Laboratório de grupos**: escolha o local e a idade publicados e tente chegar a k ≥ 2 preservando o máximo de detalhe.
+- **Detetive**: use a pista de um jornal fictício para achar a linha certa numa tabela sem nomes; na segunda rodada, a faixa etária sai da tabela.
+- **Caça aos identificadores**, **pergunta rápida da LGPD**, **painel do ECA Digital**, **jogo de ligar vazamentos a golpes** e **desafio de mascaramento**.
+- **Desafio relâmpago**: oito perguntas com tempo, bônus por sequência e placar local por apelido (as teclas 1, 2 e 3 respondem).
+
+Progresso, preferências e placar ficam só no `localStorage` do navegador usado na mostra; nada é enviado para fora. Ao final de cada visita, toque em **Novo visitante** (no slide da equipe ou no painel de conquistas) para zerar o progresso. O som vem desligado; o botão ♪ liga os efeitos.
+
+O layout usa margens fluidas e continua legível de 320 px a 2560 px. Sem JavaScript, as tabelas, listas e textos originais continuam visíveis.
 
 ## Escopo dos exemplos
 
